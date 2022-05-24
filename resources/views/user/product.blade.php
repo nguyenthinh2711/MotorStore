@@ -1,150 +1,225 @@
 @extends('layout')
 
 @section('content')
-
-
-
-<!--slider sec strat-->
-<section id="slider-sec" class="slider-sec parallax" style="background: url({{asset('img'.'/'.'banner1.2.jpg')}});">
-</section>
-<!--slider sec end-->
-
-<!--Product Line Up Start -->
-<div class="product-listing">
+<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
     <div class="container">
-        <div class="row no-gutters">
+        <h1 class="page-title">Danh sách sản phẩm<span>Motor Store</span></h1>
+    </div><!-- End .container -->
+</div><!-- End .page-header -->
+<nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Shop</a></li>
+            @foreach ($cate_selected as $cate_selected)
+                <li class="breadcrumb-item active" aria-current="page">{{$cate_selected->CategoryName}}</li>
+            @endforeach
             
-            <!-- START STICKY NAV -->
-            <div class="col-12 col-lg-4 order-2 order-lg-1 sticky">
-                <div id="product-filter-nav" class="product-filter-nav mb-3">
-                    <div class="product-category">
-                        <h5 class="filter-heading  text-center text-lg-left">Loại sản phẩm</h5>
-                        <ul>
-                            @foreach($product_count as $product)
-                            <li>
-                                <a class="active" href="{{ route('listproduct').'/'.$product->category->id }}">{{ $product->category->CategoryName }} </a>
-                                <span>({{ $product->count }})</span>
-                            </li>
-                            @endforeach
-                            
-                        </ul>
-                    </div>
-                    <div class="product-price mt-1">
-                        <h5 class="filter-heading text-center text-lg-left">Khoảng giá</h5>
-                         <ul>
-                             <li><a class="{{ Request::get('price') == 1 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 1]) }}">Dưới 50.000 đ</a></li>
-                             <li><a class="{{ Request::get('price') == 2 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 2]) }}">50.000 - 100.000 đ</a></li>
-                             <li><a class="{{ Request::get('price') == 3 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 3]) }}">100.000 - 200.000 đ</a></li>
-                             <li><a class="{{ Request::get('price') == 4 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 4]) }}">200.000 - 300.000 đ</a></li>
-                             <li><a class="{{ Request::get('price') == 5 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 5]) }}">300.000 - 400.000 đ</a></li>
-                             <li><a class="{{ Request::get('price') == 6 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 6]) }}">400.000 - 500.000</a></li>
-                             <li><a class="{{ Request::get('price') == 7 ? 'active' : ''}}" href="{{ request()->fullUrlWithQuery(['price' => 7]) }}">Trên 500.000 đ</a></li>
-                         </ul>
-                    </div>
-                    
-                    <button class="btn yellow-color-green-gradient-btn mt-1">Lọc</button>
-                    
-                    <div class="product-add mt-4">
-                        <div class="row no-gutters">
-                            <div class="col-12">
-                                <img src="{{ asset('img\advertisement.jpg') }}" alt="images">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END STICKY NAV -->
-            
-            <!-- START PRODUCT COL 8 -->
-            <div class="col-md-12 col-lg-8 order-1 order-lg-2">
-                <div class="row">
-                    
-                    <!-- START LISTING HEADING -->
-                    <div class="col-12 product-listing-heading">
-                        <h1 class="heading text-left">Danh sản phẩm sản phẩm</h1>
-                        <p class="para_text text-left">sản phẩm hay, cũng như bạn tốt, ít và được lựa chọn; chọn lựa càng nhiều, thưởng thức càng nhiều. - <b>Louisa May Alcott</b> -</p>
-                    </div>
-                    <!-- END LISTING HEADING -->
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
 
-                    <div class="col-6 mt-3 product-listing-sort">
-                         <form action="" id="form_display" method="get">
-                            <div class="form-group">
-                                <label for="">Hiển thị</label>
-                                <select class="display" name="display" >
-                                    <option {{ Request::get('display') == "md" || !Request::get('display') ? "selected='selected'" : "" }} value="md" selected>Mặc định</option>
-                                    <option {{ Request::get('display') == "3" ? "selected='selected'" : "" }} value="3">3</option>
-                                    <option {{ Request::get('display') == "6" ? "selected='selected'" : "" }} value="6">6</option>
-                                    <option {{ Request::get('display') == "9" ? "selected='selected'" : "" }} value="9">9</option>
-                                    <option {{ Request::get('display') == "12" ? "selected='selected'" : "" }} value="12">12</option>
-                                    <option {{ Request::get('display') == "15" ? "selected='selected'" : "" }} value="15">15</option>
-                                    <option {{ Request::get('display') == "all" ? "selected='selected'" : "" }} value="all">Tất cả</option>
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="toolbox">
+                    <div class="toolbox-left">
+                        <div class="toolbox-info">
+                            Showing <span>9 of 56</span> Products
+                        </div><!-- End .toolbox-info -->
+                    </div><!-- End .toolbox-left -->
+
+                    <div class="toolbox-right">
+                        <div class="toolbox-sort">
+                            <label for="sortby">Sort by:</label>
+                            <div class="select-custom">
+                                <select name="sortby" id="sortby" class="form-control">
+                                    <option value="popularity" selected="selected">Most Popular</option>
+                                    <option value="rating">Most Rated</option>
+                                    <option value="date">Date</option>
                                 </select>
                             </div>
-                         </form>
-                    </div>
+                        </div><!-- End .toolbox-sort -->
+                    </div><!-- End .toolbox-right -->
+                </div><!-- End .toolbox -->
 
-                    <div class="col-6 mt-3 product-listing-sort">
-                        <form action="" id="form_order" method="get">
-                           <div class="form-group"  style="float: right;">
-                               <label for="">Sắp xếp</label>
-                               <select class="orderby" name="orderby" >
-                                   <option {{ Request::get('orderby') == "md" || !Request::get('orderby') ? "selected='selected'" : "" }} value="md" selected>Mặc định</option>
-                                   <option {{ Request::get('orderby') == "desc" ? "selected='selected'" : "" }} value="desc">Mới nhất</option>
-                                   <option {{ Request::get('orderby') == "asc" ? "selected='selected'" : "" }} value="asc">Sản phẩm cũ</option>
-                                   <option {{ Request::get('orderby') == "price_max" ? "selected='selected'" : "" }} value="price_max">Giá tăng dần</option>
-                                   <option {{ Request::get('orderby') == "price_min" ? "selected='selected'" : "" }} value="price_min">Giá giảm dần</option>
-                               </select>
-                           </div>
-                        </form>
-                   </div>
-                    
-                    <!-- START PRODUCT LISTING SECTION -->
-                    <div class="col-12 product-listing-products">
-                        
-                        <!-- START DISPLAY PRODUCT -->
-                        <div class="product-list row">
-                            @foreach($products as $product)
-                            <div style="{{ $product->Status==0?'display:none':'display:block' }}" class="col-12 col-md-6 col-lg-4 manage-color-hover wow slideInUp" data-wow-delay=".2s">
-                                <div class="product-item owl-theme product-listing-carousel owl-carousel">
-                                    <div class="item p-item-img">
-                                        <img src="{{asset('img'.'/'.$product->Picture)}}" alt="images">
-                                        <div class="text-center d-flex justify-content-center align-items-center">
-                                            <a class="listing-cart-icon" href="{{ route('addcart', ['id' => $product->id]) }}">
-                                                <i class="fa fa-shopping-cart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="item p-item-img">
-                                        <img src="{{asset('img'.'/'.$product->Picture)}}" alt="images">
-                                        <div class="text-center d-flex justify-content-center align-items-center">
-                                            <a class="listing-cart-icon" href="{{ route('addcart', ['id' => $product->id]) }}">
-                                                <i class="fa fa-shopping-cart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="p-item-detail">
-                                    <h4 class="text-center p-item-name"><a href="{{ route('product_detail').'/'.$product->id }}"> {{ $product->ProductName }} </a></h4>
-                                    <p class="text-center p-item-price">{{ number_format($product->Price).' '.'VND' }}</p>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                        <!-- END DISPLAY PRODUCT -->
-                        
-                        <div style="margin: 5%" >
-                            {{ $products->links() }}
-                        </div>
-                    </div>
-                    <!-- END PRODUCT LISTING SECTION -->
-                </div>
-            </div>
-            <!-- END PRODUCT COL 8 -->
-          
-        </div>
-    </div>
-</div>
-<!--Product Line Up End-->
+                <div class="products mb-3">
+                    <div class="row justify-content-center">   
+                        @foreach($products as $product)  
+                        <div class="col-6 col-md-4 col-lg-4">
+                            <div class="product product-7 text-center">
+                                <figure class="product-media">
+                                    <a href="{{ route('product_detail').'/'.$product->id }}">
+                                        <img src="{{asset('img'.'/'.$product->Picture)}}" alt="Product image" class="product-image">
+                                    </a>
 
+                                    <div class="product-action-vertical">
+                                        <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                                    </div><!-- End .product-action-vertical -->
+
+                                    <div class="product-action">
+                                        <a href="{{ route('addcart', ['id' => $product->id]) }}" class="btn-product btn-cart"><span>add to cart</span></a>
+                                    </div><!-- End .product-action -->
+                                </figure><!-- End .product-media -->
+
+                                <div class="product-body">
+                                    <div class="product-cat">
+
+                                    </div><!-- End .product-cat -->
+                                    <h3 class="product-title"><a href="{{ route('product_detail').'/'.$product->id }}">{{ $product->ProductName }}</a></h3><!-- End .product-title -->
+                                    <div class="product-price">
+                                        {{ number_format($product->Price).' '.'VND' }}
+                                    </div><!-- End .product-price -->
+                                    <div class="ratings-container">
+                                        <div class="ratings">
+                                            <div class="ratings-val" style="width: 0%;"></div><!-- End .ratings-val -->
+                                        </div><!-- End .ratings -->
+                                        <span class="ratings-text">( 0 Reviews )</span>
+                                    </div><!-- End .rating-container -->
+                                </div><!-- End .product-body -->
+                            </div><!-- End .product -->
+                        </div><!-- End .col-sm-6 col-lg-4 -->
+                        @endforeach
+                    </div><!-- End .row -->
+                </div><!-- End .products -->
+
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link page-link-prev" href="#" aria-label="Previous" tabindex="-1" aria-disabled="true">
+                                <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Prev
+                            </a>
+                        </li>
+                        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item-total">of 6</li>
+                        <li class="page-item">
+                            <a class="page-link page-link-next" href="#" aria-label="Next">
+                                Next <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div><!-- End .col-lg-9 -->
+            <aside class="col-lg-3 order-lg-first">
+                <div class="sidebar sidebar-shop">
+                    <div class="widget widget-clean">
+                        <label>Filters:</label>
+                        <a href="#" class="sidebar-filter-clear">Clean All</a>
+                    </div><!-- End .widget widget-clean -->
+
+                    <div class="widget widget-collapsible">
+                        <h3 class="widget-title">
+                            <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
+                                Category
+                            </a>
+                        </h3><!-- End .widget-title -->
+
+                        <div class="collapse show" id="widget-1">
+                            <div class="widget-body">
+                                @foreach ($product_count as $product)
+                                <div class="filter-items filter-items-count">
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cat-1">
+                                            <label class="custom-control-label" for="cat-1">{{ $product->category->CategoryName }}</label>
+                                        </div><!-- End .custom-checkbox -->
+                                        <span class="item-count">{{ $product->count }}</span>
+                                    </div><!-- End .filter-item -->
+                                </div><!-- End .filter-items -->
+                                @endforeach
+                            </div><!-- End .widget-body -->
+                        </div><!-- End .collapse -->
+                    </div><!-- End .widget -->
+
+                    <div class="widget widget-collapsible">
+                        <h3 class="widget-title">
+                            <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true" aria-controls="widget-2">
+                                Supplier
+                            </a>
+                        </h3><!-- End .widget-title -->
+
+                        <div class="collapse show" id="widget-2">
+                            <div class="widget-body">
+                                <div class="filter-items">
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="size-6">
+                                            <label class="custom-control-label" for="size-6">XXL</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+                                </div><!-- End .filter-items -->
+                            </div><!-- End .widget-body -->
+                        </div><!-- End .collapse -->
+                    </div><!-- End .widget -->
+                    <div class="widget widget-collapsible">
+                        <h3 class="widget-title">
+                            <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true" aria-controls="widget-4">
+                                Price
+                            </a>
+                        </h3><!-- End .widget-title -->
+
+                        <div class="collapse show" id="widget-4">
+                            <div class="widget-body">
+                                <div class="filter-items">
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-1">
+                                            <label class="custom-control-label" for="brand-1">Next</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-2">
+                                            <label class="custom-control-label" for="brand-2">River Island</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-3">
+                                            <label class="custom-control-label" for="brand-3">Geox</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-4">
+                                            <label class="custom-control-label" for="brand-4">New Balance</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-5">
+                                            <label class="custom-control-label" for="brand-5">UGG</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-6">
+                                            <label class="custom-control-label" for="brand-6">F&F</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-7">
+                                            <label class="custom-control-label" for="brand-7">Nike</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                </div><!-- End .filter-items -->
+                            </div><!-- End .widget-body -->
+                        </div><!-- End .collapse -->
+                    </div><!-- End .widget -->
+                </div><!-- End .sidebar sidebar-shop -->
+            </aside><!-- End .col-lg-3 -->
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+</div><!-- End .page-content -->
 @endsection
-

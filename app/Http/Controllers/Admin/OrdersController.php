@@ -183,7 +183,7 @@ class OrdersController extends Controller
                 color: red;
             }
         </style>
-        <h1>Cửa hàng bán giày </h1>
+        <h1>Motor Store </h1>
         
         <p>Ngày đặt: '.\Carbon\Carbon::parse($ord->OrderDate)->format('d/m/Y') .'</p>
         <p>Người đặt hàng</p>

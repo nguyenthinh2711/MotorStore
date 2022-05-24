@@ -58,6 +58,7 @@ class CheckoutController extends Controller
     
     public function getFormPay(Request $request)
     {
+        
         $categories = CategoryProducts::all();
         $cart = Cart::content();
         // $product_pay = OrderDetails::orderBy('amount','desc')
@@ -79,6 +80,7 @@ class CheckoutController extends Controller
 
     public function postFormPay(Request $request)
     {
+        
         $c_id = $request->txtid;
         $c_email = $request->txtEmail;
         $c_name = $request->txtName;
@@ -102,6 +104,7 @@ class CheckoutController extends Controller
             }
             if ($order_id) {
                $cart = Cart::content();
+               
                foreach ($cart as $key => $value) {
                    OrderDetails::insert([
                         'OrderId' => $order_id,
@@ -112,10 +115,15 @@ class CheckoutController extends Controller
                         'created_at' => now(),
                         'updated_at' => now()
                    ]);
+                   $prd = Products::find($value->id);
+                   $prd->Quantity = $prd->Quantity - $value->qty;
+                   $prd->Sold = $prd->Sold + $value->qty;
+                   $prd->save();
                }
             }
         }
         else {
+            
              $customer_id = Customers::insertGetId([
                 "UserId" => $c_id,
                 "CustomerName" => $request->txtName,
@@ -154,25 +162,13 @@ class CheckoutController extends Controller
                         'created_at' => now(),
                         'updated_at' => now()
                    ]);
+                   $prd = Products::find($value->id);
+                   $prd->Quantity = $prd->Quantity - $value->qty;
+                   $prd->Sold = $prd->Sold + $value->qty;
+                   $prd->save();
                }
             }
         }
-
-        // $to_name = "NGUYEN CU SON";
-        // $to_email = "son2kcntt@gmail.com";//
-        // Mail::send('user.send_mail', [
-        //     'order_date' => now('Asia/Ho_Chi_Minh'),
-        //     'c_email' => $c_email,
-        //     'c_name' => $c_name,
-        //     'c_address' => $request->txtad,
-        //     'c_phone' => $request->txtPhone,
-        //     'cart' => $cart,
-        //     'total' => $total,
-        // ], function ($message) use($c_email, $to_name, $to_email){
-        //     $message->from($to_email, $to_name);
-        //     $message->to($c_email);
-        //     $message->subject('THÔNG TIN ĐƠN ĐẶT HÀNG');
-        // });
         Cart::destroy();
         return redirect()->route("checkout_success")->with("success","Đặt hàng thành công");
 
@@ -201,7 +197,8 @@ class CheckoutController extends Controller
 
     public function history(Request $request)
     {
-        $cus_id = Session::get('user_id');
+        $user = Session::get('user_id');
+        $cus_id = Customers::where('UserId', $user)->first()->id;
         $order_history = Orders::orderBy("OrderDate","DESC")->where('CustomerId', $cus_id)->get();
         $categories = CategoryProducts::all();
         $cart = Cart::content();

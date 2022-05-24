@@ -14,6 +14,7 @@ class Products extends Model
         'Picture',
         'Price',
         'Quantity',
+        'Sold',
         'Status',
         'Cate_Id'
     ];

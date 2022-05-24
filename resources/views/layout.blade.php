@@ -1,41 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
+<!-- molla/index-2.html  22 Nov 2019 09:55:32 GMT -->
 <head>
-    <!-- Meta Tags For Seo + Page Optimization -->
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Themes Industry">
-    <!-- description -->
-    <meta name="description" content="Woman Store is a highly creative, modern, visually stunning and Bootstrap responsive multipurpose agency and HTML5 template with 14 ready home page demos.">
-    <!-- keywords -->
-    <meta name="keywords" content="creative, modern, clean, bootstrap responsive, h tml5, css3, portfolio, blog, agency, templates, multipurpose, one page, corporate, start-up, studio, branding, designer, freelancer, carousel, parallax, photography, personal, masonry, grid, faq">
-    <!-- Page Title -->
-    <title>Motor Store | Home</title>
+    <title>Motor Store</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Motor Store">
+    <meta name="author" content="p-themes">
     <!-- Favicon -->
-    <link rel="icon" href="/dummy-img/favicon.ico">
-    <!-- Bundle -->
-    <link rel="stylesheet" href="{{asset('vendor/css/bundle.min.css')}}">
-    <!-- Plugin Css -->
-    <link rel="stylesheet" href="{{asset('vendor/css/jquery.fancybox.min.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/css/swiper.min.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/css/cubeportfolio.min.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/css/wow.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/css/LineIcons.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/nouislider.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/range-slider.css')}}">
-    <!-- Slider Setting Css  -->
-    <link rel="stylesheet" href="{{asset('css/settings.css')}}">
-    <!-- Mega Menu  -->
-    <link rel="stylesheet" href="{{asset('css/megamenu.css')}}">
-    <!-- StyleSheet  -->
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <!-- Custom Css  -->
-    <link rel="stylesheet" href="{{asset('css/custom.css')}}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/images/icons/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/images/icons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/images/icons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{asset('assets/images/icons/site.html')}}">
+    <link rel="mask-icon" href="{{asset('assets/images/icons/safari-pinned-tab.svg')}}" color="#666666">
+    <link rel="shortcut icon" href="{{asset('assets/images/icons/favicon.ico')}}">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="assets/images/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/owl-carousel/owl.carousel.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/magnific-popup/magnific-popup.css')}}">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 </head>
+
 <body>
+    <div class="page-wrapper">
     
     <a class="scroll-top-arrow" href="javascript:void(0);"><i class="fa fa-angle-up"></i></a>
     
@@ -46,140 +43,105 @@
     <!--LOADER-->
    
     <!-- START HEADER NAVIGATION -->
-    <div class="header-area">
-        <div class="container">
-            <div class="row upper-nav">
-                <div class=" text-left nav-logo">
-                    <a href="{{ route('index') }}" class="navbar-brand"><img src="{{asset('img/logo.png')}}" alt="img"></a>
-                </div>
-                
+
                 @include('layouts.menutop')
-                
-            </div>
-        </div>
-    </div>
+
     <!-- END HEADER NAVIGATION -->
     
-    @yield('content')
+    <main class="main">
+        @yield('content')
+    </main><!-- End .main -->
     
     <!--footer1 sec start-->
-    <div class="footer">
-        <div class="container">
-            <div class="row footer-container">
-                <div class="col-sm-12 col-lg-4 f-sec1  text-center text-lg-left">
-                    <h4 class="high-lighted-heading">Về chúng tôi</h4>
-                    <p>Chúng tôi coi trọng sứ mệnh của mình là tăng cường khả năng tiếp cận toàn cầu với nền giáo dục chất lượng.</p>
-                    <a href="#">Đọc thêm</a>
-                    <h4>Mạng xã hội</h4>
-                    <div class="s-icons">
-                        <ul class="social-icons-simple">
-                            <li><a href="javascript:void(0)" class="facebook-bg-hvr"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
-                            <li><a href="javascript:void(0)" class="twitter-bg-hvr"><i class="fab fa-twitter" aria-hidden="true"></i></a> </li>
-                            <li><a href="javascript:void(0)" class="instagram-bg-hvr"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-lg-5 f-sec2 ">
-                    <div class="row">
-                        <div class="col-12 col-md-6">
-                            <h4 class="text-center text-md-left">Thông tin</h4>
-                            <ul class="text-center text-md-left">
-                                <li><a href="{{ route('introduce') }}">Về chúng tôi</a></li>
-                                <li><a href="{{ route('new') }}">Tin tức</a></li>
-                                <li><a href="{{ route('contact') }}">Liên hệ chúng tôi</a></li>
-                                <li><a href="{{ route('index') }}">Các sản phẩm</a></li>
-                                <li>
-                                    <?php
-                                        $user_id = Session::get("user_id");
-                                        if ($user_id != null) { 
-                                    ?>
-                                      <a href="{{ route('history') }}">Lịch sử mua hàng</a>
-                                    <?php } else { ?>
-                                        <a href="{{ route('get_login_order') }} ">Lịch sử mua hàng</a>
-                                    <?php } ?>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <h4 class="text-center text-md-left">Thông tin tài khoản</h4>
-                            <ul class="text-center text-md-left">
-                                <?php
-                                    $user_id = Session::get("user_id");
-                                    if ($user_id != null) { 
-                                ?>
-                                    <li><a href="javascript:void(0)">Lịch sử đặt hàng</a></li>
-                                    <li><a href="javascript:void(0)">Thông tin giao hàng</a></li>
-                                    <li><a href="javascript:void(0)">Chính sản phẩm hoàn lại tiền</a></li>
-                                    <li><a href="javascript:void(0)">Trang web đáp ứng</a></li>
-                                    <li><a href="{{ route('logout_checkout') }}">Đăng xuất</a></li>
-                                <?php } else { ?>
-                                    <li><a href="{{ route('get_login_order') }}">Đăng nhập</a></li>
-                                    <li><a href="{{ route('register') }}">Đăng ký</a></li>
-                                    <?php } ?>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-lg-3 f-sec3  text-center text-lg-left">
-                    <h4>Danh mục sản phẩm</h4>
-                    <div class="foot-tag-list">
-                    @foreach($category_footer as $category)
-                       <a href="{{ route('listproduct').'/'.$category->id }}" style="{{ $category->Status==0?'display:none':'display:block' }} "><span>{{$category->CategoryName}}</span></a> 
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <footer class="footer footer-dark">
+        <div class="footer-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="widget widget-about">
+                            <img src="{{asset('assets/images/logo-footer.png')}}" class="footer-logo" alt="Footer Logo" width="105" height="25">
+                            <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. </p>
+
+                            <div class="social-icons">
+                                <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+                                <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                                <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                                <a href="#" class="social-icon" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
+                                <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                            </div><!-- End .soial-icons -->
+                        </div><!-- End .widget about-widget -->
+                    </div><!-- End .col-sm-6 col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="widget">
+                            <h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
+
+                            <ul class="widget-list">
+                                <li><a href="about.html">About Molla</a></li>
+                                <li><a href="#">How to shop on Molla</a></li>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="contact.html">Contact us</a></li>
+                                <li><a href="login.html">Log in</a></li>
+                            </ul><!-- End .widget-list -->
+                        </div><!-- End .widget -->
+                    </div><!-- End .col-sm-6 col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="widget">
+                            <h4 class="widget-title">Customer Service</h4><!-- End .widget-title -->
+
+                            <ul class="widget-list">
+                                <li><a href="#">Payment Methods</a></li>
+                                <li><a href="#">Money-back guarantee!</a></li>
+                                <li><a href="#">Returns</a></li>
+                                <li><a href="#">Shipping</a></li>
+                                <li><a href="#">Terms and conditions</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                            </ul><!-- End .widget-list -->
+                        </div><!-- End .widget -->
+                    </div><!-- End .col-sm-6 col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="widget">
+                            <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
+
+                            <ul class="widget-list">
+                                <li><a href="#">Sign In</a></li>
+                                <li><a href="cart.html">View Cart</a></li>
+                                <li><a href="#">My Wishlist</a></li>
+                                <li><a href="#">Track My Order</a></li>
+                                <li><a href="#">Help</a></li>
+                            </ul><!-- End .widget-list -->
+                        </div><!-- End .widget -->
+                    </div><!-- End .col-sm-6 col-lg-3 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .footer-middle -->
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p class="footer-copyright">Copyright © 2019 Molla Store. All Rights Reserved.</p><!-- End .footer-copyright -->
+                <figure class="footer-payments">
+                    <img src="{{asset('assets/images/payments.png')}}" alt="Payment methods" width="272" height="20">
+                </figure><!-- End .footer-payments -->
+            </div><!-- End .container -->
+        </div><!-- End .footer-bottom -->
+    </footer><!-- End .footer -->
     <!--foo0ter1 sec end-->
+</div><!-- End .page-wrapper -->
     
-    <!--START SEARCH AREA-->
-   @include('layouts.search')
-    <!--END SEARCH AREA -->
-    
-    <!--START Cart Box-->
-    @include('layouts.cartbox')
-    <!--END Cart Box -->   
-        
-    
-    <!-- JavaScript -->
-    <script src="{{asset('vendor/js/bundle.min.js')}}"></script>
-    <!-- Plugin Js -->
-    <script src="{{asset('vendor/js/jquery.fancybox.min.js')}}"></script>
-    <script src="{{asset('vendor/js/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('vendor/js/swiper.min.js')}}"></script>
-    <script src="{{asset('vendor/js/jquery.cubeportfolio.min.js')}}"></script>
-    <script src="{{asset('vendor/js/wow.min.js')}}"></script>
-    <script src="{{asset('vendor/js/bootstrap-input-spinner.js')}}"></script>
-    <script src="{{asset('vendor/js/parallaxie.min.js')}}"></script>
-    <script src="{{asset('vendor/js/stickyfill.min.js')}}"></script>
-    <script src="{{asset('js/nouislider.min.js')}}"></script>
-    
-    <script src="{{asset('vendor/js/jquery.themepunch.tools.min.js')}}"></script>
-    <script src="{{asset('vendor/js/jquery.themepunch.revolution.min.js')}}"></script>
-    <!-- SLIDER REVOLUTION EXTENSIONS -->
-    <script src="{{asset('vendor/js/extensions/revolution.extension.actions.min.js')}}"></script>
-    <script src="{{asset('vendor/js/extensions/revolution.extension.carousel.min.js')}}"></script>
-    <script src="{{asset('vendor/js/extensions/revolution.extension.kenburn.min.js')}}"></script>
-    <script src="{{asset('vendor/js/extensions/revolution.extension.layeranimation.min.js')}}"></script>
-    <script src="{{asset('vendor/js/extensions/revolution.extension.migration.min.js')}}"></script>
-    <script src="{{asset('vendor/js/extensions/revolution.extension.navigation.min.js')}}"></script>
-    <script src="{{asset('vendor/js/extensions/revolution.extension.parallax.min.js')}}"></script>
-    <script src="{{asset('vendor/js/extensions/revolution.extension.slideanims.min.js')}}"></script>
-    <script src="{{asset('vendor/js/extensions/revolution.extension.video.min.js')}}"></script>
-    
-    <!-- Custom Script -->
-    <script src="{{asset('js/script.js')}}"></script>
-    <script src="{{asset('js/ajax.js')}}"></script>
-    <script>
-        $(function () { 
-            $('.orderby').change(function () { 
-                $('#form_order').submit();
-            });
-            $('.display').change(function () { 
-                $('#form_display').submit();
-            });
-        })
-    </script>
-</body>
-</html>
+     <!-- Plugins JS File -->
+     <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+     <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+     <script src="{{asset('assets/js/jquery.hoverIntent.min.js')}}"></script>
+     <script src="{{asset('assets/js/jquery.waypoints.min.js')}}"></script>
+     <script src="{{asset('assets/js/superfish.min.js')}}"></script>
+     <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
+     <script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
+     <!-- Main JS File -->
+     <script src="{{asset('assets/js/main.js')}}"></script>
+ </body>
+ 
+ 
+ <!-- molla/index-2.html  22 Nov 2019 09:55:42 GMT -->
+ </html>

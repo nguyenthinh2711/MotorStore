@@ -1,45 +1,42 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!-- <link rel="stylesheet" href="{{ asset('css/pay.css') }}"> -->
-<!------ Include the above in your HEAD tag ---------->
 
 @extends('layout')
 
 @section('content')
-<!--slider sec strat-->
-<section id="slider-sec" class="slider-sec parallax" style="background: url({{asset('img'.'/'.'banner1.3.jpg')}});">
-</section>
-<!--slider sec end-->
+<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+    <div class="container">
+        <h1 class="page-title">History order<span>Motor Store</span></h1>
+    </div><!-- End .container -->
+</div><!-- End .page-header -->
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Shop</a></li>
+            <li class="breadcrumb-item active" aria-current="page">History order</li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
 
 <div class="about_content">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-10  text-center text-lg-left wow slideInUp" data-wow-duration="2s">
-                <h1 class="heading">Lịch sử mua hàng</h1>
-                <p class="para_text">"Một cuốn sách hay cho ta một điều tốt, một người bạn tốt cho ta một điều hay.” <b>- Gustavơ Lebon -</b></p>
-            </div>
-        </div>
-    </div>
-    
     <div class="container mt-5">
         <div class="row order-body">
             @php
             $tt = 1;
             @endphp
-            <table class="table table-bordered text-center">
+            <table class="table table-cart">
                 <thead>
                     <tr>
-                        <th class="title">STT</th>
-                        <th class="title">Mã đơn hàng</th>
-                        <th class="title">Tên khách hàng</th>
-                        <th class="title">Ngày đặt</th>
-                        <th class="title">Số điện thoại nhận</th>
-                        <th class="title">Địa chỉ nhận</th>
-                        <th class="title">Tổng tiền (VNĐ)</th>
-                        <th class="title">Ghi chú</th>
-                        <th class="title">Trạng thái</th>
-                        <th class="title">Xem</th>
+                        <th>STT</th>
+                        <th>Code</th>
+                        <th>Customer name</th>
+                        <th>Booking date</th>
+                        <th>Customer phone</th>
+                        <th>customer address</th>
+                        <th>total  (VNĐ)</th>
+                        <th>Note order</th>
+                        <th>Status</th>
+                        <th>View</th>
                     </tr>
                 </thead>
                 
@@ -51,9 +48,9 @@
                         <td data-label="Tên khách hàng" style="text-align:left">{{ $r->customer->CustomerName }}</td>
                         <td data-label="Ngày đặt">{{ \Carbon\Carbon::parse($r->OrderDate)->format('d/m/Y') }}</td>
                         <td data-label="Số điện thoại nhận">{{ $r->ShipPhone }}</td>
-                        <td data-label="Địa chỉ nhận" style="text-align:left">{{ $r->ShipAddress }}</td>
-                        <td data-label="Tổng tiền(đ)" style="color:red; font-weight:bold; text-align:right">{{ number_format($r->total ) }}</td>
-                        <td data-label="Ghi chú" style="text-align:left">{{ $r->Note }}</td>
+                        <td data-label="Địa chỉ nhận" >{{ $r->ShipAddress }}</td>
+                        <td data-label="Tổng tiền(đ)" >{{ number_format($r->total ) }}</td>
+                        <td data-label="Ghi chú" >{{ $r->Note }}</td>
                         <td data-label="Trạng thái">
                             @if($r->Status == 0)
                             <a href="#" class="label label-warning">Chờ xử lý</a>

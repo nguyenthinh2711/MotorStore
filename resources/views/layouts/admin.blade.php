@@ -24,7 +24,7 @@
                     <div class="left__content">
                         <div class="left__logo">MOTOR STORE</div>
                         <div class="left__profile">
-                            <div class="left__image"><img src="{{asset('assets/author3.jpg')}}" alt=""></div>
+                            <div class="left__image"><img src="{{asset('assets/images/logo.png')}}" alt=""></div>
                             @if(Auth::check())
                                 <p class="left__name">
                                   {{ Auth::user()->username  }}

@@ -19,7 +19,7 @@ class ProductController extends Controller
     public function index($id,Request $request)
     {
         $categories = CategoryProducts::all();
-        
+        $cate_selected = CategoryProducts::where("id",$id)->get();
         // $products = Products::where("Cate_Id", $id)->orderBy('id','DESC')->limit(6)->get();
         $products = Products::where("Cate_Id", $id)->orderBy('id','DESC')->paginate(6);
         
@@ -134,6 +134,8 @@ class ProductController extends Controller
                         "product_count",
                         "product_pay",
                         "search_product",
-                        "category_footer"));
+                        "category_footer",
+                        "cate_selected",
+                    ));
     }
 }

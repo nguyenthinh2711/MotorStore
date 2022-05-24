@@ -24,12 +24,13 @@ class HomeController extends Controller
 
 
         $products = Products::orderBy('id', 'DESC')->limit(5)->get();     //LIST PRODUCT
+        $product_new = Products::orderBy('created_at', 'DESC')->limit(10)->get();
         $product_asc = Products::where('Cate_Id', 12)->orderBy('id', 'DESC')->orderby("ProductName", "asc")->limit(6)->get();
         $product_bt= Products::where('Cate_Id', 11)->orderBy('id', 'DESC')->limit(6)->get();
 
         $products_sale = Discount::all(); 
         $product_pay = OrderDetails::orderBy('id', 'DESC')->limit(10)->get();
- 
+        $product_topsell = Products::orderBy('Sold', 'DESC')->get();
         $cart = Cart::content(); 
 
         // SEARCH PRODUCT
@@ -52,7 +53,10 @@ class HomeController extends Controller
             "product_pay",
             "cart", 
             "search_product",
-            "category_footer"));
+            "category_footer",
+            "product_new",
+            "product_topsell"
+        ));
     }
 
     public function search(Request $request)
