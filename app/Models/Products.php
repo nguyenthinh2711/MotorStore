@@ -15,6 +15,7 @@ class Products extends Model
         'Price',
         'Quantity',
         'Sold',
+        'Sup_Id',
         'Status',
         'Cate_Id'
     ];
@@ -43,5 +44,9 @@ class Products extends Model
     public function comments()
     {
         return $this->hasMany("App\Models\Comments","ProductId");
+    }
+    public function supplier()
+    {
+        return $this->belongsTo("App\Models\Suppliers","Sup_Id");
     }
 }

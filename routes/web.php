@@ -81,6 +81,10 @@ use Illuminate\Support\Facades\Route;
             Route::get('/statistic/order_count', 'Admin\StatisticsController@getOrderCount')->name("/statistic/order_count");
             Route::get('/statistic/order_list/{month}/{year}', 'Admin\StatisticsController@getListOrderTime')->name("/statistic/order_list");
             
+            //Supplier
+            Route::resource('supplier', 'Admin\SuppliersController');
+
+
             // COMMENT
             Route::resource('comment', 'Admin\CommentsController');
             Route::get('/search_comment', 'Admin\CommentsController@search')->name('search_comment');
@@ -115,6 +119,7 @@ use Illuminate\Support\Facades\Route;
         // SHOPPING CART
         Route::resource('cart', "User\CartController");
         Route::get('addcart/{id?}', "User\CartController@addCart")->name("addcart");
+        Route::post('/update-all-cart', "User\CartController@UpdateAllCart");
         
         //CHECK OUT
         Route::get('get_login_order', "User\CheckoutController@get_login_order")->name("get_login_order");

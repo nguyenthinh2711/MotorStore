@@ -33,8 +33,8 @@ class NewsController extends Controller
         // $product_count = Products::groupBy('Cate_Id')                             // COUNT PRODUCT
         //                         ->selectRaw('count(id) as count, Cate_Id')
         //                         ->get();
-        $product_count = Products::select("Cate_Id", DB::raw("count(id) as count"))
-                                   ->groupBy("Cate_Id")->get();
+        // $product_count = Products::select("Cate_Id", DB::raw("count(id) as count"))
+        //                            ->groupBy("Cate_Id")->get();
         // $product_count = DB::table("products")
         //                 ->select("Cate_Id", DB::raw("count(id) as count"))
         //                 ->groupBy("Cate_Id")->g‌​et();
@@ -45,7 +45,7 @@ class NewsController extends Controller
                             "cart",
                             "product_pay",
                             "search_product",
-                            "product_count",
+                            // "product_count",
                             "news",
                             "category_footer"));
     }
@@ -67,9 +67,9 @@ class NewsController extends Controller
         // $product_count = Products::groupBy('Cate_Id')                             // COUNT PRODUCT
         //                         ->selectRaw('count(id) as count, Cate_Id')
         //                         ->get();
-        $product_count = DB::table("products")
-                        ->select("Cate_Id", DB::raw("count(id) as count"))
-                        ->groupBy("Cate_Id")->g‌​et();
+        // $product_count = DB::table("products")
+        //                 ->select("Cate_Id", DB::raw("count(id) as count"))
+        //                 ->groupBy("Cate_Id")->g‌​et();
 
         $news = News::find($id);
         $category_footer = CategoryProducts::orderBy("id","DESC")->limit(9)->get();
@@ -78,7 +78,7 @@ class NewsController extends Controller
                             "cart",
                             "product_pay",
                             "search_product",
-                            "product_count",
+                            // "product_count",
                             "news",
                             "category_footer"));
     }

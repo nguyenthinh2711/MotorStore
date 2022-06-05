@@ -1,95 +1,57 @@
 @extends('layout')
 
 @section('content')
-
-
-<!--slider sec strat-->
-<section id="slider-sec" class="slider-sec parallax" style="background: url({{asset('img'.'/'.'banner1.2.jpg')}});">
-</section>
-<!--slider sec end-->
-
-<!--Product Line Up Start -->
-<div class="product-listing">
+<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
     <div class="container">
-        <div class="row no-gutters">
-            
-            <!-- START STICKY NAV -->
-            <div class="col-12 col-lg-4 order-2 order-lg-1 sticky">
-                <div id="product-filter-nav" class="product-filter-nav mb-3">
-                    <div class="product-category">
-                        <h5 class="filter-heading  text-center text-lg-left">Loại sản phẩm</h5>
-                        <ul>
-                            @foreach($product_count as $product)
-                            <li>
-                                <a href="{{ route('listproduct').'/'.$product->category->id }}">{{ $product->category->CategoryName }} </a>
-                                <span>({{ $product->count }})</span>
-                            </li>
-                            @endforeach
-                            
-                        </ul>
-                    </div>
-                    
-                    <div class="product-add mt-4">
-                        <div class="row no-gutters">
-                            <div class="col-12">
-                                <img src="{{ asset('img\advertisement.jpg') }}" alt="images">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <h1 class="page-title">Blog Listing<span>Blog</span></h1>
+    </div><!-- End .container -->
+</div><!-- End .page-header -->
+<nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Blog</a></li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                @foreach($news as $new)
+                <article class="entry entry-list">
+                    <div class="row align-items-center">
+                        <div class="col-md-5">
+                            <figure class="entry-media">
+                                <a href="{{route('new_detail', $new->id)}}">
+                                    <img src="{{asset('img'.'/'.$new->picture)}}" alt="image desc">
+                                </a>
+                            </figure><!-- End .entry-media -->
+                        </div><!-- End .col-md-5 -->
+
+                        <div class="col-md-7">
+                            <div class="entry-body">
+                                <div class="entry-meta">
+                                    <a href="#">{{ \Carbon\Carbon::parse($new->date)->format('d/m/Y') }}</a>
+                                </div><!-- End .entry-meta -->
+
+                                <h2 class="entry-title" >
+                                    <a href="{{route('new_detail', $new->id)}}"> {{$new->title}}</a>
+                                </h2><!-- End .entry-title -->
+
+                                <div class="entry-content">
+                                    <p>{{ $new->description }}</p>
+                                    <a href="{{route('new_detail', $new->id)}}" class="read-more">Continue Reading</a>
+                                </div><!-- End .entry-content -->
+                            </div><!-- End .entry-body -->
+                        </div><!-- End .col-md-7 -->
+                    </div><!-- End .row -->
+                </article><!-- End .entry -->
+                @endforeach
             </div>
-            <!-- END STICKY NAV -->
-            
-            <!-- START PRODUCT COL 8 -->
-            <div class="col-md-12 col-lg-8 order-1 order-lg-2">
-                <div class="row">
-                    
-                    <!-- START LISTING HEADING -->
-                    <div class="col-12 product-listing-heading">
-                        <h3 class="heading text-left">Tin tức</h3>
-                        <p class="para_text text-left"> "Đọc sản phẩm hay cũng giống như trò chuyện với các bộ óc tuyệt vời nhất của những thế kỷ đã trôi qua.” - <b>Rene Descartes</b> - </p>
-                    </div>
-                    <!-- END LISTING HEADING -->
-                    
-                    <!-- START PRODUCT LISTING SECTION -->
-                    <div class="col-12 product-listing-products">
-                        @foreach($news as $new)
-                            <!-- START NEWS PRODUCT -->
-                            <div class="product-list row">
-                                <div class="col-12 col-md-6 col-lg-4 manage-color-hover wow slideInUp" data-wow-delay=".2s">
-                                    <div class="product-item owl-theme product-listing-carousel owl-carousel">
-                                        <div class="item p-item-img">
-                                            <img src="{{asset('img'.'/'.$new->picture)}}" alt="images">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-lg-8 ">
-                                    <div class="p-item-detail mt-4">
-                                        <h4 class="text-left p-item-name"><a href="{{route('new_detail', $new->id)}}"> {{$new->title}} </a></h4>
-                                        <ul class="info-more">
-                                            <li class="info-item"><i class="far fa-calendar-alt"></i><time pubdate="" datetime="2016-12-15">{{ \Carbon\Carbon::parse($new->date)->format('d/m/Y') }}</time></li>
-                                            <li class="info-item"><i class="far fa-file-alt"></i></i><a href="#"> Tin tức	</a> </li>
-                                        </ul>
-                                        <p class="text-left">{{ $new->description }}</p>
-                                    </div>
-                                    <a class="readmore btn-rb clear-fix" href="{{route('new_detail', $new->id)}}" role="button">Xem tiếp <span class="fa fa-angle-double-right"></span></a>
-                                </div>
-                            </div>
-                            <!-- END NEWS PRODUCT -->
-                        @endforeach
-                    </div>
-                    <!-- END PRODUCT LISTING SECTION -->
-                </div>
-            </div>
-            <!-- END PRODUCT COL 8 -->
-            
         </div>
-       
     </div>
-</div>
-<!--Product Line Up End-->
-<div style="margin-left: 50%; margin-bottom: 50px;">
-    {{$news->links()}}
 </div>
 @endsection
 

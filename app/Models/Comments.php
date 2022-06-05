@@ -10,7 +10,7 @@ class Comments extends Model
     protected $table = "comments";
 
     protected $fillable = [
-        "id", "name", "email", "content", "ProductId"
+        "id", "name", "email","star", "content", "ProductId"
     ];
 
     protected $primaryKey = "id";

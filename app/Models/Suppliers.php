@@ -15,4 +15,8 @@ class Suppliers extends Model
         'Email'
     ];
     protected $primaryKey = 'id';
+    public function products()
+    {
+        return $this->hasMany("App\Models\Products","Sup_Id");
+    }
 }

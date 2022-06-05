@@ -20,24 +20,16 @@ class ProductController extends Controller
     {
         $categories = CategoryProducts::all();
         $cate_selected = CategoryProducts::where("id",$id)->get();
-        // $products = Products::where("Cate_Id", $id)->orderBy('id','DESC')->limit(6)->get();
-        $products = Products::where("Cate_Id", $id)->orderBy('id','DESC')->paginate(6);
+
+        $products = Products::where("Cate_Id", $id)->orderBy('id','DESC')->paginate(10);
         
-        // $product_count = Products::groupBy('Cate_Id')                             // COUNT PRODUCT
-        //                             ->selectRaw('count(id) as count, Cate_Id')
-        //                             ->get();
+
         $product_count = Products::select("Cate_Id", DB::raw("count(id) as count"))
                         ->groupBy("Cate_Id")->get();
-        // $product_count = DB::table("products")
-        //                 ->select("Cate_Id", DB::raw("count(id) as count"))
-        //                 ->groupBy("Cate_Id")->g‌​et();
-        
+
         $cart = Cart::content();
         
-        // $product_pay = OrderDetails::orderBy('amount','desc')
-        //                 ->select(DB::raw('sum(Quantity) as amount, ProductId'))
-        //                 ->groupBy('ProductId')
-        //                 ->limit(10)->get();
+
         $product_pay = OrderDetails::orderBy('id', 'DESC')->limit(10)->get();
         // SEARCH 
         $keywords = $request->txtSearch;
@@ -78,34 +70,37 @@ class ProductController extends Controller
             $price = $request->price;
             switch ($price) {
                 case '1':
-                    $products = Products::where("Cate_Id", $id)->where('Price','<',50000)->paginate(12);
+                    $products = Products::where("Cate_Id", $id)->where('Price','<',100000)->paginate(12);
                     break;
                 case '2':
-                    $products = Products::where("Cate_Id", $id)->whereBetween('Price', [50000, 100000])->paginate(12);
+                    $products = Products::where("Cate_Id", $id)->whereBetween('Price', [100000, 300000])->paginate(12);
                     break;
                 case '3':
-                    $products = Products::where("Cate_Id", $id)->whereBetween('Price', [100000, 200000])->paginate(12);
+                    $products = Products::where("Cate_Id", $id)->whereBetween('Price', [300000, 500000])->paginate(12);
                     break;
                 case '4':
-                    $products = Products::where("Cate_Id", $id)->whereBetween('Price',[200000, 300000])->paginate(12);
+                    $products = Products::where("Cate_Id", $id)->whereBetween('Price',[500000, 1000000])->paginate(12);
                     break;
                 case '5':
-                    $products = Products::where("Cate_Id", $id)->whereBetween('Price',[300000, 400000])->paginate(12);
+                    $products = Products::where("Cate_Id", $id)->whereBetween('Price',[1000000, 2000000])->paginate(12);
                     break;
                 case '6':
-                    $products = Products::where("Cate_Id", $id)->whereBetween('Price',[400000, 500000])->paginate(12);
+                    $products = Products::where("Cate_Id", $id)->whereBetween('Price',[2000000, 3000000])->paginate(12);
                     break;
                 case '7':
-                    $products = Products::where("Cate_Id", $id)->where('Price','>',500000)->paginate(12);
+                    $products = Products::where("Cate_Id", $id)->where('Price','>',3000000)->paginate(12);
                     break;
                     
             }
         } 
         
-
+        
         //SORT PRODUCT 
+        
+       
         if ($request->orderby) {
             $orderby = $request->orderby;
+            $price = $request->price;
             switch ($orderby) {
                 case 'desc': // NEW
                     $products = Products::where("Cate_Id", $id)->orderBy('id','DESC')->paginate(12);
@@ -123,8 +118,146 @@ class ProductController extends Controller
                      $products = Products::where("Cate_Id", $id)->orderBy('id','DESC')->paginate(12);
                     
             }
+           
+            
         }
-
+        if ($request->orderby  && $request->price) {
+            $orderby = $request->orderby;
+            $price = $request->price;
+            switch ($orderby) {
+                case 'desc': // NEW
+                    switch ($price) {
+                        case '1':
+                            $products = Products::where("Cate_Id", $id)->where('Price','<',100000)->orderBy('id','DESC')->paginate(12);
+                            break;
+                        case '2':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price', [100000, 300000])->orderBy('id','DESC')->paginate(12);
+                            break;
+                        case '3':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price', [300000, 500000])->orderBy('id','DESC')->paginate(12);
+                            break;
+                        case '4':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price',[500000, 1000000])->orderBy('id','DESC')->paginate(12);
+                            break;
+                        case '5':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price',[1000000, 2000000])->orderBy('id','DESC')->paginate(12);
+                            break;
+                        case '6':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price',[2000000, 3000000])->orderBy('id','DESC')->paginate(12);
+                            break;
+                        case '7':
+                            $products = Products::where("Cate_Id", $id)->where('Price','>',3000000)->orderBy('id','DESC')->paginate(12);
+                            break;
+                            
+                    }
+                    break;
+                case 'asc':  //OLD
+                    $products = Products::where("Cate_Id", $id)->orderBy('id','ASC')->paginate(12);
+                    switch ($price) {
+                        case '1':
+                            $products = Products::where("Cate_Id", $id)->where('Price','<',100000)->orderBy('id','ASC')->paginate(12);
+                            break;
+                        case '2':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price', [100000, 300000])->orderBy('id','ASC')->paginate(12);
+                            break;
+                        case '3':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price', [300000, 500000])->orderBy('id','ASC')->paginate(12);
+                            break;
+                        case '4':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price',[500000, 1000000])->orderBy('id','ASC')->paginate(12);
+                            break;
+                        case '5':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price',[1000000, 2000000])->orderBy('id','ASC')->paginate(12);
+                            break;
+                        case '6':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price',[2000000, 3000000])->orderBy('id','ASC')->paginate(12);
+                            break;
+                        case '7':
+                            $products = Products::where("Cate_Id", $id)->where('Price','>',3000000)->orderBy('id','ASC')->paginate(12);
+                            break;
+                            
+                    }
+                    break;
+                case 'price_max': // ascending
+                      switch ($price) {
+                        case '1':
+                            $products = Products::where("Cate_Id", $id)->where('Price','<',100000)->orderBy('Price','ASC')->paginate(12);
+                            break;
+                        case '2':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price', [100000, 300000])->orderBy('Price','ASC')->paginate(12);
+                            break;
+                        case '3':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price', [300000, 500000])->orderBy('Price','ASC')->paginate(12);
+                            break;
+                        case '4':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price',[500000, 1000000])->orderBy('Price','ASC')->paginate(12);
+                            break;
+                        case '5':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price',[1000000, 2000000])->orderBy('Price','ASC')->paginate(12);
+                            break;
+                        case '6':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price',[2000000, 3000000])->orderBy('Price','ASC')->paginate(12);
+                            break;
+                        case '7':
+                            $products = Products::where("Cate_Id", $id)->where('Price','>',3000000)->orderBy('Price','ASC')->paginate(12);
+                            break;
+                            
+                    }
+                      break;
+                case 'price_min': //decrease
+                    switch ($price) {
+                        case '1':
+                            $products = Products::where("Cate_Id", $id)->where('Price','<',100000)->orderBy('Price','DESC')->paginate(12);
+                            break;
+                        case '2':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price', [100000, 300000])->orderBy('Price','DESC')->paginate(12);
+                            break;
+                        case '3':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price', [300000, 500000])->orderBy('Price','DESC')->paginate(12);
+                            break;
+                        case '4':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price',[500000, 1000000])->orderBy('Price','DESC')->paginate(12);
+                            break;
+                        case '5':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price',[1000000, 2000000])->orderBy('Price','DESC')->paginate(12);
+                            break;
+                        case '6':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price',[2000000, 3000000])->orderBy('Price','DESC')->paginate(12);
+                            break;
+                        case '7':
+                            $products = Products::where("Cate_Id", $id)->where('Price','>',3000000)->orderBy('Price','DESC')->paginate(12);
+                            break;
+                            
+                    }
+                    break;
+                default:
+                     switch ($price) {
+                        case '1':
+                            $products = Products::where("Cate_Id", $id)->where('Price','<',100000)->orderBy('id','DESC')->paginate(12);
+                            break;
+                        case '2':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price', [100000, 300000])->orderBy('id','DESC')->paginate(12);
+                            break;
+                        case '3':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price', [300000, 500000])->orderBy('id','DESC')->paginate(12);
+                            break;
+                        case '4':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price',[500000, 1000000])->orderBy('id','DESC')->paginate(12);
+                            break;
+                        case '5':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price',[1000000, 2000000])->orderBy('id','DESC')->paginate(12);
+                            break;
+                        case '6':
+                            $products = Products::where("Cate_Id", $id)->whereBetween('Price',[2000000, 3000000])->orderBy('id','DESC')->paginate(12);
+                            break;
+                        case '7':
+                            $products = Products::where("Cate_Id", $id)->where('Price','>',3000000)->orderBy('id','DESC')->paginate(12);
+                            break;
+                            
+                    }
+                    
+            }
+        }
         $category_footer = CategoryProducts::orderBy("id","DESC")->limit(9)->get();
         // dd($products);
         return view("user.product", 

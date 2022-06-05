@@ -9,8 +9,8 @@
 <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
     <div class="container">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Shop</a></li>
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('listproduct').'/1' }}">Sản phẩm</a></li>
             @foreach ($cate_selected as $cate_selected)
                 <li class="breadcrumb-item active" aria-current="page">{{$cate_selected->CategoryName}}</li>
             @endforeach
@@ -26,21 +26,24 @@
                 <div class="toolbox">
                     <div class="toolbox-left">
                         <div class="toolbox-info">
-                            Showing <span>9 of 56</span> Products
                         </div><!-- End .toolbox-info -->
                     </div><!-- End .toolbox-left -->
 
                     <div class="toolbox-right">
-                        <div class="toolbox-sort">
-                            <label for="sortby">Sort by:</label>
-                            <div class="select-custom">
-                                <select name="sortby" id="sortby" class="form-control">
-                                    <option value="popularity" selected="selected">Most Popular</option>
-                                    <option value="rating">Most Rated</option>
-                                    <option value="date">Date</option>
-                                </select>
-                            </div>
-                        </div><!-- End .toolbox-sort -->
+                        <form action="" id="form_sort" method="get">
+                            <div class="toolbox-sort">
+                                <label for="sortby">Sắp xếp theo:</label>
+                                <div class="select-custom">
+                                    <select name="orderby" id="sortby" class="form-control" onchange="Sort()">
+                                        <option {{ Request::get('orderby') == "md" || !Request::get('orderby') ? "selected='selected'" : "" }} value="md" selected>Mặc định</option>
+                                        <option {{ Request::get('orderby') == "desc" ? "selected='selected'" : "" }} value="desc">Mới nhất</option>
+                                        <option {{ Request::get('orderby') == "asc" ? "selected='selected'" : "" }} value="asc">Sản phẩm cũ</option>
+                                        <option {{ Request::get('orderby') == "price_max" ? "selected='selected'" : "" }} value="price_max">Giá tăng dần</option>
+                                        <option {{ Request::get('orderby') == "price_min" ? "selected='selected'" : "" }} value="price_min">Giá giảm dần</option>
+                                    </select>
+                                </div>
+                            </div><!-- End .toolbox-sort -->
+                        </form>
                     </div><!-- End .toolbox-right -->
                 </div><!-- End .toolbox -->
 
@@ -73,9 +76,8 @@
                                     </div><!-- End .product-price -->
                                     <div class="ratings-container">
                                         <div class="ratings">
-                                            <div class="ratings-val" style="width: 0%;"></div><!-- End .ratings-val -->
+                                            <div class="ratings-val" style="width: {{App\Models\Comments::where('ProductId', $product->id)->avg('star')}}%;"></div><!-- End .ratings-val -->
                                         </div><!-- End .ratings -->
-                                        <span class="ratings-text">( 0 Reviews )</span>
                                     </div><!-- End .rating-container -->
                                 </div><!-- End .product-body -->
                             </div><!-- End .product -->
@@ -86,34 +88,21 @@
 
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link page-link-prev" href="#" aria-label="Previous" tabindex="-1" aria-disabled="true">
-                                <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Prev
-                            </a>
-                        </li>
-                        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item-total">of 6</li>
-                        <li class="page-item">
-                            <a class="page-link page-link-next" href="#" aria-label="Next">
-                                Next <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
-                            </a>
-                        </li>
+                        {{ $products->links() }}
                     </ul>
                 </nav>
             </div><!-- End .col-lg-9 -->
             <aside class="col-lg-3 order-lg-first">
                 <div class="sidebar sidebar-shop">
                     <div class="widget widget-clean">
-                        <label>Filters:</label>
-                        <a href="#" class="sidebar-filter-clear">Clean All</a>
+                        <label>Lọc sản phẩm:</label>
+                        <a href="#" class="sidebar-filter-clear">Xóa tất cả</a>
                     </div><!-- End .widget widget-clean -->
 
                     <div class="widget widget-collapsible">
                         <h3 class="widget-title">
                             <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
-                                Category
+                                Danh mục
                             </a>
                         </h3><!-- End .widget-title -->
 
@@ -122,10 +111,7 @@
                                 @foreach ($product_count as $product)
                                 <div class="filter-items filter-items-count">
                                     <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cat-1">
-                                            <label class="custom-control-label" for="cat-1">{{ $product->category->CategoryName }}</label>
-                                        </div><!-- End .custom-checkbox -->
+                                        <a href="{{ route('listproduct').'/'.$product->category->id }}" class="product-title"> {{ $product->category->CategoryName }}</a>
                                         <span class="item-count">{{ $product->count }}</span>
                                     </div><!-- End .filter-item -->
                                 </div><!-- End .filter-items -->
@@ -134,86 +120,51 @@
                         </div><!-- End .collapse -->
                     </div><!-- End .widget -->
 
-                    <div class="widget widget-collapsible">
-                        <h3 class="widget-title">
-                            <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true" aria-controls="widget-2">
-                                Supplier
-                            </a>
-                        </h3><!-- End .widget-title -->
-
-                        <div class="collapse show" id="widget-2">
-                            <div class="widget-body">
-                                <div class="filter-items">
-                                    <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="size-6">
-                                            <label class="custom-control-label" for="size-6">XXL</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .filter-item -->
-                                </div><!-- End .filter-items -->
-                            </div><!-- End .widget-body -->
-                        </div><!-- End .collapse -->
-                    </div><!-- End .widget -->
+                    
                     <div class="widget widget-collapsible">
                         <h3 class="widget-title">
                             <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true" aria-controls="widget-4">
-                                Price
+                                Khoảng giá
                             </a>
                         </h3><!-- End .widget-title -->
 
                         <div class="collapse show" id="widget-4">
                             <div class="widget-body">
-                                <div class="filter-items">
+                                <div class="filter-items filter-items-count">
                                     <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="brand-1">
-                                            <label class="custom-control-label" for="brand-1">Next</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .filter-item -->
-
+                                        <a href="{{ request()->fullUrlWithQuery(['price' => 1]) }}" class=" {{ Request::get('price') == 1 ? '' : 'product-title'}}"> Dưới 100.000 đ</a>
+                                    </div>
+                                </div>
+                                <div class="filter-items filter-items-count">
                                     <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="brand-2">
-                                            <label class="custom-control-label" for="brand-2">River Island</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .filter-item -->
-
+                                        <a href="{{ request()->fullUrlWithQuery(['price' => 2]) }}" class=" {{ Request::get('price') == 2 ? '' : 'product-title'}}"> 100.000 - 300.000 đ</a>
+                                    </div>
+                                </div>
+                                <div class="filter-items filter-items-count">
                                     <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="brand-3">
-                                            <label class="custom-control-label" for="brand-3">Geox</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .filter-item -->
-
+                                        <a href="{{ request()->fullUrlWithQuery(['price' => 3]) }}" class=" {{ Request::get('price') == 3 ? '' : 'product-title'}}"> 300.000 - 500.000 VNĐ</a>
+                                    </div>
+                                </div>
+                                <div class="filter-items filter-items-count">
                                     <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="brand-4">
-                                            <label class="custom-control-label" for="brand-4">New Balance</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .filter-item -->
-
+                                        <a href="{{ request()->fullUrlWithQuery(['price' => 4]) }}" class=" {{ Request::get('price') == 4 ? '' : 'product-title'}}"> 500.000 - 1.000.000 VNĐ</a>
+                                    </div>
+                                </div>
+                                <div class="filter-items filter-items-count">
                                     <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="brand-5">
-                                            <label class="custom-control-label" for="brand-5">UGG</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .filter-item -->
-
+                                        <a href="{{ request()->fullUrlWithQuery(['price' => 5]) }}" class=" {{ Request::get('price') == 5 ? '' : 'product-title'}}"> 1.000.000 - 2.000.000 VNĐ</a>
+                                    </div>
+                                </div>
+                                <div class="filter-items filter-items-count">
                                     <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="brand-6">
-                                            <label class="custom-control-label" for="brand-6">F&F</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .filter-item -->
-
+                                        <a href="{{ request()->fullUrlWithQuery(['price' => 6]) }}" class=" {{ Request::get('price') == 6 ? '' : 'product-title'}}"> 2.000.000 - 3.000.000 VNĐ</a>
+                                    </div>
+                                </div>
+                                <div class="filter-items filter-items-count">
                                     <div class="filter-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="brand-7">
-                                            <label class="custom-control-label" for="brand-7">Nike</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .filter-item -->
-
-                                </div><!-- End .filter-items -->
+                                        <a href="{{ request()->fullUrlWithQuery(['price' => 7]) }}" class=" {{ Request::get('price') == 7 ? '' : 'product-title'}}"> Trên 3.000.000 VNĐ</a>
+                                    </div>
+                                </div>
                             </div><!-- End .widget-body -->
                         </div><!-- End .collapse -->
                     </div><!-- End .widget -->
@@ -222,4 +173,9 @@
         </div><!-- End .row -->
     </div><!-- End .container -->
 </div><!-- End .page-content -->
+<script>
+    function Sort(){
+        document.getElementById("form_sort").submit();
+    }
+</script>
 @endsection

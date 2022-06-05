@@ -5,8 +5,8 @@
 <div class="right__search">
     <form role="form" action="/search_product" method="get">
         @csrf
-        <input style="width: 250px;" type="search" class="search" name="txtSearch" id="" placeholder="Tìm theo mã sách, tên sách, tên loại, giá" title="Tìm theo mã sách, tên sách, tên loại, giá">
-        <input type="submit" class="button" value="Tìm kiếm" bladeholder="Tìm theo mã sách, tên sách, tên loại, giá">
+        <input style="width: 250px;" type="search" class="search" name="txtSearch" id="" placeholder="Tìm theo mã , tên , tên loại , giá" title="Tìm theo mã, tên, tên loại, giá">
+        <input type="submit" class="button" value="Tìm kiếm" bladeholder="Tìm theo mã , tên , tên loại, giá">
     </form>
 </div>  
 <?php

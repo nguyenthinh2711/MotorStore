@@ -122,17 +122,14 @@
                                 </div>
                             </li>
                             <li class="left__menuItem">
-                                <a href="{{ route('contact_admin.index') }}" class="left__title"><img src="{{asset('assets/envelope-alt.svg')}}" alt="">Quản lý liên hệ</a>
+                                <div class="left__title"><img src="{{asset('assets/envelope-alt.svg')}}" alt="">Quản lý nhà cung cấp<img class="left__iconDown" src="{{asset('assets/arrow-down.svg')}}" alt=""></div>
+                                <div class="left__text">
+                                    <a class="left__link" href="{{route('supplier.index')}}">Danh sách </a>
+                                    <a class="left__link" href="{{ route('supplier.create')}}">Thêm nhà cung cấp</a>
+                                </div>
                             </li>
                             <li class="left__menuItem">
                                 <a href="{{ route('comment.index') }}" class="left__title"><img src="{{asset('assets/chat.svg')}}" alt="">Quản lý bình luận</a>
-                            </li>
-                            <li class="left__menuItem">
-                                <div class="left__title"><img src="{{asset('assets/poll.svg')}}" alt="">Ngôn ngữ<img class="left__iconDown" src="{{asset('assets/arrow-down.svg')}}" alt=""></div>
-                                <div class="left__text">
-                                    <a class="left__link" href="{{ route('language.index', ['vi']) }}">Tiếng Việt</a>
-                                    <a class="left__link" href="{{ route('language.index', ['en']) }}">Tiếng Anh</a>
-                                </div>
                             </li>
                             <li class="left__menuItem">
                                

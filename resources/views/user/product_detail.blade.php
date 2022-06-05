@@ -4,9 +4,9 @@
 <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
     <div class="container d-flex align-items-center">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Products</a></li>
-            <li class="breadcrumb-item" aria-current="page">{{  $product->category->CategoryName }}</li>
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('listproduct').'/1' }}">Products</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('listproduct').'/'.$product->category->id }}">{{  $product->category->CategoryName }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ $product->ProductName }}</li>
         </ol>
 
@@ -39,14 +39,21 @@
                             </figure><!-- End .product-main-image -->
 
                             <div id="product-zoom-gallery" class="product-image-gallery">
+                                <div class="product-gallery-item ">
+                                    <img  src="{{asset('img'.'/'.$product->Picture)}}"  alt="product side" onclick="changeImg('0')" id="0">
+                                </div>
                                 
-                                <a class="product-gallery-item active" href="#" data-image="{{asset('img'.'/'.$product->Picture)}}" data-zoom-image="{{asset('img'.'/'.$product->Picture)}}">
-                                    <img src="{{asset('img'.'/'.$product->Picture)}}" alt="product side">
-                                </a>
+                                {{-- <a class="product-gallery-item active" href="" data-image="{{asset('img'.'/'.$product->Picture)}}" data-zoom-image="{{asset('img'.'/'.$product->Picture)}}">
+                                    
+                                </a> --}}
                                 @foreach($pictures as $value)
-                                <a class="product-gallery-item " href="#" data-image="{{asset('img'.'/'.$value->picture)}}" data-zoom-image="{{asset('img'.'/'.$value->picture)}}">
-                                    <img src="{{asset('img'.'/'.$value->picture)}}" alt="product cross">
-                                </a>
+                                <div class="product-gallery-item ">
+                                    <img  src="{{asset('img'.'/'.$value->picture)}}" alt="product cross" onclick="changeImg('{{$value->id}}')" id="{{ $value->id }}">
+                                </div>
+                                
+                                {{-- <a class="product-gallery-item " href="" data-image="{{asset('img'.'/'.$value->picture)}}" data-zoom-image="{{asset('img'.'/'.$value->picture)}}">
+                                    
+                                </a> --}}
                                 @endforeach
                             </div><!-- End .product-image-gallery -->
                         </div><!-- End .row -->
@@ -76,18 +83,20 @@
                         <div class="product-content">
                             <p>Finding good parts will make your motorcycle more perfect, so your life will be more pleasant.</p>
                         </div><!-- End .product-content -->                     
+                        <form action="{{ route('addcart', ['id' => $product->id]) }}" method="get" enctype="multipart/form-data">
+                            @csrf
+                            <div class="details-filter-row details-row-size">
+                                <label for="qty">Qty:</label>
+                                <div class="product-details-quantity">
+                                    <input type="number" id="qty" name="txtQty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                </div><!-- End .product-details-quantity -->
+                            </div><!-- End .details-filter-row -->
 
-                        <div class="details-filter-row details-row-size">
-                            <label for="qty">Qty:</label>
-                            <div class="product-details-quantity">
-                                <input type="number" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
-                            </div><!-- End .product-details-quantity -->
-                        </div><!-- End .details-filter-row -->
-
-                        <div class="product-details-action">
-                            <a href="{{ route('addcart', ['id' => $product->id]) }}" class="btn-product btn-cart"><span>add to cart</span></a>
-                        </div><!-- End .product-details-action -->
-
+                            <div class="product-details-action">
+                                <button type="submit" class="btn-product btn-cart"><span>THÊM GIỎ HÀNG</span></button>
+                                {{-- <a href="{{ route('addcart', ['id' => $product->id]) }}" class="btn-product btn-cart"><span>add to cart</span></a> --}}
+                            </div><!-- End .product-details-action -->
+                        </form>
                         <div class="product-details-footer">
                             <div class="product-cat">
                                 <span>Category:</span>
@@ -111,41 +120,19 @@
         <div class="product-details-tab">
             <ul class="nav nav-pills justify-content-center" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Description</a>
+                    <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Mô Tả</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Additional information</a>
+                    <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Giao Hàng & Đổi Trả </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Shipping & Returns</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews (2)</a>
+                    <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Đánh Giá</a>
                 </li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
                     <div class="product-desc-content">
                         {!! $product->Description !!}
-                    </div><!-- End .product-desc-content -->
-                </div><!-- .End .tab-pane -->
-                <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
-                    <div class="product-desc-content">
-                        <h3>Information</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. </p>
-
-                        <h3>Fabric & care</h3>
-                        <ul>
-                            <li>Faux suede fabric</li>
-                            <li>Gold tone metal hoop handles.</li>
-                            <li>RI branding</li>
-                            <li>Snake print trim interior </li>
-                            <li>Adjustable cross body strap</li>
-                            <li> Height: 31cm; Width: 32cm; Depth: 12cm; Handle Drop: 61cm</li>
-                        </ul>
-
-                        <h3>Size</h3>
-                        <p>one size</p>
                     </div><!-- End .product-desc-content -->
                 </div><!-- .End .tab-pane -->
                 <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
@@ -157,56 +144,67 @@
                 </div><!-- .End .tab-pane -->
                 <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
                     <div class="reviews">
-                        <h3>Reviews (2)</h3>
+                        @foreach($comments as $comment)
                         <div class="review">
                             <div class="row no-gutters">
                                 <div class="col-auto">
-                                    <h4><a href="#">Samanta J.</a></h4>
+                                    <h4>{{ $comment->name }}</h4>
                                     <div class="ratings-container">
                                         <div class="ratings">
-                                            <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                            <div class="ratings-val" style="width: {{$comment->star}}%;"></div><!-- End .ratings-val -->
                                         </div><!-- End .ratings -->
                                     </div><!-- End .rating-container -->
-                                    <span class="review-date">6 days ago</span>
+                                    <span class="review-date">{{ \Carbon\Carbon::parse($comment->created_at)->format('d/m/Y') }}</span>
                                 </div><!-- End .col -->
                                 <div class="col">
-                                    <h4>Good, perfect size</h4>
-
                                     <div class="review-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus cum dolores assumenda asperiores facilis porro reprehenderit animi culpa atque blanditiis commodi perspiciatis doloremque, possimus, explicabo, autem fugit beatae quae voluptas!</p>
+                                        <p>{{ $comment->content }}</p>
                                     </div><!-- End .review-content -->
-
-                                    <div class="review-action">
-                                        <a href="#"><i class="icon-thumbs-up"></i>Helpful (2)</a>
-                                        <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
-                                    </div><!-- End .review-action -->
                                 </div><!-- End .col-auto -->
                             </div><!-- End .row -->
                         </div><!-- End .review -->
-
+                        @endforeach
+                        
                         <div class="review">
                             <div class="row no-gutters">
-                                <div class="col-auto">
-                                    <h4><a href="#">John Doe</a></h4>
-                                    <div class="ratings-container">
-                                        <div class="ratings">
-                                            <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
-                                        </div><!-- End .ratings -->
-                                    </div><!-- End .rating-container -->
-                                    <span class="review-date">5 days ago</span>
-                                </div><!-- End .col -->
-                                <div class="col">
-                                    <h4>Very good</h4>
+                                <form action="{{ route('comment',$product->id) }}" id="register" id="contact-form-data" method="post" class="contact-form mb-3">
+                                    @csrf
+                                    <input type="hidden" name="ProductId" value="{{ $product->id }}">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="name" class="sr-only">Tên</label>
+                                            <input type="text" class="form-control" name="name" placeholder="Tên *" id="name" required>
+                                        </div><!-- End .col-sm-6 -->
 
-                                    <div class="review-content">
-                                        <p>Sed, molestias, tempore? Ex dolor esse iure hic veniam laborum blanditiis laudantium iste amet. Cum non voluptate eos enim, ab cumque nam, modi, quas iure illum repellendus, blanditiis perspiciatis beatae!</p>
-                                    </div><!-- End .review-content -->
+                                        <div class="col-sm-6">
+                                            <label for="email" class="sr-only">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Email *" required>
+                                        </div><!-- End .col-sm-6 -->
+                                    </div><!-- End .row -->
+                                    <div class="row">
+                                        <div class="rating-css col-sm-6">
+                                            <div class="star-icon">
+                                                <input type="radio" value="20" name="star" checked id="rating1">
+                                                <label for="rating1" class="fa fa-star"></label>
+                                                <input type="radio" value="40" name="star" id="rating2">
+                                                <label for="rating2" class="fa fa-star"></label>
+                                                <input type="radio" value="60" name="star" id="rating3">
+                                                <label for="rating3" class="fa fa-star"></label>
+                                                <input type="radio" value="80" name="star" id="rating4">
+                                                <label for="rating4" class="fa fa-star"></label>
+                                                <input type="radio" value="100" name="star" id="rating5">
+                                                <label for="rating5" class="fa fa-star"></label>
+                                            </div>
+                                        </div>
+                                    </div><!-- End .row -->
+                                    <label for="comment" class="sr-only">Nội dung</label>
+                                    <textarea class="form-control" name="content"  id="comment" cols="30" rows="4" id="cmessage" required placeholder="Nội dung *"></textarea>
 
-                                    <div class="review-action">
-                                        <a href="#"><i class="icon-thumbs-up"></i>Helpful (0)</a>
-                                        <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
-                                    </div><!-- End .review-action -->
-                                </div><!-- End .col-auto -->
+                                    <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
+                                        <span>Gửi</span>
+                                        <i class="icon-long-arrow-right"></i>
+                                    </button>
+                                </form><!-- End .contact-form -->
                             </div><!-- End .row -->
                         </div><!-- End .review -->
                     </div><!-- End .reviews -->
@@ -214,4 +212,15 @@
             </div><!-- End .tab-content -->
         </div><!-- End .product-details-tab -->
     </div><!-- End .page-content -->
-@endsection
+    <script>
+        function changeImg(id){
+            let imgPath = document.getElementById(id).getAttribute('src');
+            console.log(imgPath);
+            document.getElementById('product-zoom').setAttribute('src', imgPath);
+        }
+    </script>
+@stop
+
+
+
+

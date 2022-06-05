@@ -56,7 +56,7 @@ class CategoryProductController extends Controller
 
         // $category = CategoryProducts::create($request->all());
 
-        return redirect()->route('category.index')->with('message','Thêm loại sách thành công');
+        return redirect()->route('category.index')->with('message','Thêm danh mục thành công');
     }
 
     /**

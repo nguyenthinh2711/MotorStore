@@ -18,6 +18,7 @@ class CreateCommentsTable extends Migration
             $table->string("name");
             $table->string("email");
             $table->string("content");
+            $table->integer('star');
             $table->integer('ProductId')->unsigned();
             $table->foreign('ProductId')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
