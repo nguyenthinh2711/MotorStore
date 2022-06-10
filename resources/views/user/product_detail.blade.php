@@ -66,9 +66,9 @@
 
                         <div class="ratings-container">
                             <div class="ratings">
-                                <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                <div class="ratings-val" style="width: {{App\Models\Comments::where('ProductId', $product->id)->avg('star')}}%;"></div><!-- End .ratings-val -->
                             </div><!-- End .ratings -->
-                            <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
+                            {{-- <a class="ratings-text"  href="#product-review-link" id="review-link">( 2 Đánh giá )</a> --}}
                         </div><!-- End .rating-container -->
 
                         <div class="product-price">
@@ -81,7 +81,7 @@
                         </div><!-- End .product-price -->
 
                         <div class="product-content">
-                            <p>Finding good parts will make your motorcycle more perfect, so your life will be more pleasant.</p>
+                            <p>Tìm được phụ tùng tốt sẽ làm cho chiếc xe máy của bạn trở nên hoàn hảo hơn, cuộc sống của bạn sẽ dễ chịu hơn.</p>
                         </div><!-- End .product-content -->                     
                         <form action="{{ route('addcart', ['id' => $product->id]) }}" method="get" enctype="multipart/form-data">
                             @csrf
@@ -137,9 +137,9 @@
                 </div><!-- .End .tab-pane -->
                 <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
                     <div class="product-desc-content">
-                        <h3>Delivery & returns</h3>
-                        <p>We deliver to over 100 countries around the world. For full details of the delivery options we offer, please view our <a href="#">Delivery information</a><br>
-                        We hope you’ll love every purchase, but if you ever need to return an item you can do so within a month of receipt. For full details of how to make a return, please view our <a href="#">Returns information</a></p>
+                        <h3>Giao hàng và đổi trả</h3>
+                        <p>Để biết chi tiết đầy đủ về các tùy chọn giao hàng mà chúng tôi cung cấp, vui lòng xem thông tin Giao hàng của chúng tôi
+                            Chúng tôi hy vọng bạn sẽ thích mỗi lần mua hàng, nhưng nếu bạn cần trả lại một mặt hàng, bạn có thể làm như vậy trong vòng một tháng kể từ khi nhận được. Để biết chi tiết đầy đủ về cách đổi trả hàng, vui lòng xem thông tin Trả hàng của chúng tôi</p>
                     </div><!-- End .product-desc-content -->
                 </div><!-- .End .tab-pane -->
                 <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">

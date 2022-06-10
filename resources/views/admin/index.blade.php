@@ -15,7 +15,7 @@
             <div class="right__cardDesc">Xem Chi Tiết <img src="{{asset('assets/arrow-right.svg')}}" alt=""></div>
         </a>
         <a class="right__card" href="{{ route('category.index') }}">
-            <div class="right__cardTitle">Loại sách</div>
+            <div class="right__cardTitle">Loại linh kiện</div>
             <div class="right__cardNumber">{{ $count_category}}</div>
             <div class="right__cardDesc">Xem Chi Tiết <img src="{{asset('assets/arrow-right.svg')}}" alt=""></div>
         </a>

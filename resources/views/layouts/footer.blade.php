@@ -57,10 +57,10 @@
                                     @csrf
                                 </form>
                             <?php } else { ?>
-                                <li><a href="{{ route('login') }}">Đăng Nhập</a></li>
+                                <li><a href="{{ route('get_login_order') }}">Đăng Nhập</a></li>
                             <?php } ?>
-                        <li><a href="cart.html">Giỏ hàng</a></li>
-                        <li><a href="#">Lịch sử đặt hàng</a></li>
+                        <li><a href="{{ route('cart.index') }}">Giỏ hàng</a></li>
+                        <li><a href="{{ route('history') }}">Lịch sử đặt hàng</a></li>
                         <li><a href="#">Trợ giúp</a></li>
                     </ul><!-- End .widget-list -->
                 </div><!-- End .widget -->

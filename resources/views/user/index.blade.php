@@ -115,7 +115,7 @@
                         </div><!-- End .product-price -->
                     </div><!-- End .product-body -->
                     <div class="product-action">
-                        <a href="{{ route('addcart', ['id' => $product->product->id]) }}" class="btn-product btn-cart"><span>add to cart</span></a>
+                        <a href="{{ route('addcart', ['id' => $product->product->id]) }}" class="btn-product btn-cart"><span>Thêm vào giỏ hàng</span></a>
                     </div><!-- End .product-action -->
                 </div><!-- End .product -->
                 @endforeach
@@ -166,7 +166,7 @@
                                 </div><!-- End .product-price -->
                             </div><!-- End .product-body -->
                             <div class="product-action">
-                                <a href="{{ route('addcart', ['id' => $product->id]) }}" class="btn-product btn-cart"><span>add to cart</span></a>
+                                <a href="{{ route('addcart', ['id' => $product->id]) }}" class="btn-product btn-cart"><span>thêm vào giỏ hàng</span></a>
                             </div><!-- End .product-action -->
                         </div><!-- End .product -->
                     </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->

@@ -23,6 +23,14 @@
             </select>
         </div>
         <div class="right__inputWrapper">
+            <label for="p_supplier">Nhà cung cấp</label>
+            <select name="txtSup" class="form-control form-control-sm">
+                @foreach($sups as $sup)
+                    <option value="{{ $sup->id }}">{{ $sup->SupplierName }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="right__inputWrapper">
             <label for="desc">Mô tả</label>
             <textarea name="txtDes" id="ckeditor2" cols="30" rows="10" placeholder="Mô tả" class="form-control @error('txtDes') is-invalid @enderror" value="{{ old('txtDes') }}" required autocomplete="txtDes" autofocus></textarea>
             @error('txtDes')

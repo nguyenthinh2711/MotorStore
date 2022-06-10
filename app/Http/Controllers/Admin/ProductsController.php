@@ -11,6 +11,7 @@ use App\Http\Requests\ProductRequest;
 // use Auth;
 use App\Exports\ProductsExport;
 use App\Imports\ProductsImport;
+use App\Models\Suppliers;
 use Maatwebsite\Excel\Facades\Excel; 
 use Illuminate\Support\Facades\Auth;
 
@@ -48,8 +49,9 @@ class ProductsController extends Controller
     {
         //
         $db = CategoryProducts::all();
+        $sups = Suppliers::all();
         // $db = CategoryProducts::where("CategoryName");
-        return view("admin.product.add_product", ['db'=>$db]);
+        return view("admin.product.add_product")->with('db',$db)->with('sups',$sups);
     }
 
     /**
@@ -74,6 +76,7 @@ class ProductsController extends Controller
         $product_id = Products::insertGetId([
             'ProductName' => $request->txtName,
             'Cate_Id' => $request->txtCate,
+            'Sup_Id' => $request->txtSup,
             'Description' => $request->txtDes,
             'Picture' => $filename,
             'Quantity' => $request->txtquantity,

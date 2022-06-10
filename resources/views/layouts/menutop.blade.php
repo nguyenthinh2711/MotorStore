@@ -46,7 +46,7 @@
                                     @csrf
                                 </form>
                             <?php } else { ?>
-                                <li><a href="{{ route('login') }}"><i class="icon-user"></i>Đăng Nhập</a></li>
+                                <li><a href="{{ route('get_login_order') }}"><i class="icon-user"></i>Đăng Nhập</a></li>
                             <?php } ?>
                            
                         </ul>

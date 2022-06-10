@@ -58,11 +58,11 @@
                                     </a>
 
                                     <div class="product-action-vertical">
-                                        <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                                        <a href="{{ route('product_detail').'/'.$product->id }}" class="btn-product-icon btn-quickview" title="Xem"><span>Xem</span></a>
                                     </div><!-- End .product-action-vertical -->
 
                                     <div class="product-action">
-                                        <a href="{{ route('addcart', ['id' => $product->id]) }}" class="btn-product btn-cart"><span>add to cart</span></a>
+                                        <a href="{{ route('addcart', ['id' => $product->id]) }}" class="btn-product btn-cart"><span>Thêm vào giỏ hàng</span></a>
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
 

@@ -11,6 +11,7 @@ use App\Models\Picture;
 use App\Models\OrderDetails;
 use Cart;
 use Auth;
+use Carbon\Carbon;
 use DB;
 
 class HomeController extends Controller
@@ -27,10 +28,10 @@ class HomeController extends Controller
         $product_new = Products::orderBy('created_at', 'DESC')->limit(10)->get();
         $product_asc = Products::where('Cate_Id', 12)->orderBy('id', 'DESC')->orderby("ProductName", "asc")->limit(6)->get();
         $product_bt= Products::where('Cate_Id', 11)->orderBy('id', 'DESC')->limit(6)->get();
-
-        $products_sale = Discount::all(); 
+        $dt = Carbon::now()->toDateString();
+        $products_sale = Discount::where('BeginDate','<=',$dt)->where('EndDate','>=',$dt)->get(); 
         $product_pay = OrderDetails::orderBy('id', 'DESC')->limit(10)->get();
-        $product_topsell = Products::orderBy('Sold', 'DESC')->get();
+        $product_topsell = Products::orderBy('Sold', 'DESC')->limit(10)->get();
         $cart = Cart::content(); 
 
         // SEARCH PRODUCT
