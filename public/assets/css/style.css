@@ -915,6 +915,7 @@ blockquote.text-white cite span {
     padding-right: 1.5rem
 }
 
+.search-dropdown,
 .cart-dropdown,
 .compare-dropdown {
     display: flex;
@@ -937,6 +938,7 @@ blockquote.text-white cite span {
     display: none
 }
 
+.search-dropdown .dropdown-menu,
 .cart-dropdown .dropdown-menu,
 .compare-dropdown .dropdown-menu {
     display: block;
@@ -972,6 +974,7 @@ blockquote.text-white cite span {
     right: -1px
 }
 
+.search-dropdown .btn-remove,
 .cart-dropdown .btn-remove,
 .compare-dropdown .btn-remove {
     position: absolute;
@@ -989,6 +992,7 @@ blockquote.text-white cite span {
     margin-top: -1.2rem
 }
 
+.search-dropdown .btn-remove:hover,
 .cart-dropdown .btn-remove:hover,
 .cart-dropdown .btn-remove:focus,
 .compare-dropdown .btn-remove:hover,
@@ -996,6 +1000,8 @@ blockquote.text-white cite span {
     color: #333
 }
 
+.search-dropdown:hover .dropdown-toggle,
+.search-dropdown.show .dropdown-toggle,
 .cart-dropdown:hover .dropdown-toggle,
 .cart-dropdown.show .dropdown-toggle,
 .compare-dropdown:hover .dropdown-toggle,
@@ -1003,6 +1009,13 @@ blockquote.text-white cite span {
     color: #c96
 }
 
+.search-dropdown .dropdown-menu{
+    visibility: hidden;
+    opacity: 1
+}
+
+
+.search-dropdown.show .dropdown-menu,
 .cart-dropdown:hover .dropdown-menu,
 .cart-dropdown.show .dropdown-menu,
 .compare-dropdown:hover .dropdown-menu,
@@ -1108,10 +1121,12 @@ blockquote.text-white cite span {
     background-color: #c96
 }
 
+.search-dropdown .dropdown-cart-products,
 .cart-dropdown .dropdown-cart-products {
     margin-top: -1rem
 }
 
+.search-dropdown .product,
 .cart-dropdown .product {
     position: relative;
     display: flex;
@@ -1124,6 +1139,7 @@ blockquote.text-white cite span {
     box-shadow: none !important
 }
 
+.search-dropdown .product-image-container,
 .cart-dropdown .product-image-container {
     position: relative;
     max-width: 60px;
@@ -1131,6 +1147,7 @@ blockquote.text-white cite span {
     margin-left: auto
 }
 
+.search-dropdown .product-title,
 .cart-dropdown .product-title {
     font-weight: 400;
     font-size: 1.3rem;
@@ -1140,15 +1157,19 @@ blockquote.text-white cite span {
     margin-bottom: .4rem
 }
 
+.search-dropdown .product-title a,
 .cart-dropdown .product-title a {
     color: inherit
 }
 
+.search-dropdown .product-title a:hover,
+.search-dropdown .product-title a:focus,
 .cart-dropdown .product-title a:hover,
 .cart-dropdown .product-title a:focus {
     color: #c96
 }
 
+.search-dropdown .product-cart-details, 
 .cart-dropdown .product-cart-details {
     font-weight: 400;
     max-width: 150px;
@@ -14317,8 +14338,7 @@ button:focus {
 
 .editor-content p {
     margin-bottom: 2.4rem;
-    font: 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-     !important
+    font: 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
 }
 
 .editor-content h3 {

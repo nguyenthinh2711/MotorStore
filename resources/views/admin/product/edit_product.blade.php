@@ -24,6 +24,7 @@
                 @endforeach
             </select>
         </div>
+
         <div class="right__inputWrapper">
             <label for="desc">Mô tả</label>
             <textarea name="txtDes" id="ckeditor3" cols="30" rows="10" placeholder="Mô tả" class="form-control @error('txtDes') is-invalid @enderror" value="{{ old('txtDes') }}" required autocomplete="txtDes" autofocus>{{ $db->Description}}</textarea>

@@ -3,7 +3,7 @@
 @section('content')
 <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
     <div class="container">
-        <h1 class="page-title">Shopping Cart<span>Motor Store</span></h1>
+        <h1 class="page-title">Shopping Cart<span>D&H STORE</span></h1>
     </div><!-- End .container -->
 </div><!-- End .page-header -->
 <nav aria-label="breadcrumb" class="breadcrumb-nav">
@@ -26,6 +26,7 @@
                             <tr>
                                 <th>Sản phẩm</th>
                                 <th>Đơn giá</th>
+                                <th>Size</th>
                                 <th>Số lượng</th>
                                 <th>Tổng giá</th>
                                 <th></th>
@@ -49,6 +50,7 @@
                                     </div><!-- End .product -->
                                 </td>
                                 <td class="price-col">{{ number_format($key->price) }}</td>
+                                <td class="price-col">{{ $key->options->size }}</td>
                                 <td class="quantity-col">
                                     <div class="cart-product-quantity">
                                         <input type="number" data-id="{{ $key->rowId }}" class="form-control" value="{{ $key->qty }}" min="1" max="" step="1" data-decimals="0" required>

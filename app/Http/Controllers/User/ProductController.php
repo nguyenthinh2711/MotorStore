@@ -18,7 +18,7 @@ class ProductController extends Controller
    
     public function index($id,Request $request)
     {
-        $categories = CategoryProducts::all();
+        $categories = CategoryProducts::where('Status',1)->get();
         $cate_selected = CategoryProducts::where("id",$id)->get();
 
         $products = Products::where("Cate_Id", $id)->orderBy('id','DESC')->paginate(10);
@@ -270,5 +270,10 @@ class ProductController extends Controller
                         "category_footer",
                         "cate_selected",
                     ));
+    }
+
+    public function searchAPI(Request $request){
+        $products = Products::where('ProductName','LIKE',"%".$request->txtSearch."%")->take(4)->get();
+        return $products;
     }
 }

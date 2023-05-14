@@ -143,7 +143,7 @@ class ProductsController extends Controller
         }
         else {
             $db = Products::find($id);
-            $categories = CategoryProducts::all();
+            $categories = CategoryProducts::where('Status',1)->get();
             // dd($db, $categories);
             return view("admin.product.edit_product",compact("db","categories"));
         }

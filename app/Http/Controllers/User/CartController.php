@@ -25,7 +25,7 @@ class CartController extends Controller
     public function index(Request $request)
     {
         //
-        $categories = CategoryProducts::all();
+        $categories = CategoryProducts::where('Status',1)->get();
         $cart = Cart::content();
         // $product_pay = OrderDetails::groupBy('ProductId')       // PRODUCT PAY
         //             ->selectRaw('sum(Quantity) as amount, ProductId')
@@ -46,7 +46,8 @@ class CartController extends Controller
         return view("user.shopcart", compact("categories", "cart","product_pay","search_product","category_footer"));
     }
     
-    public function addCart($id, Request $request){
+    public function addCart($id, Request $request)
+    {
         $product = Products::find($id);
         $discount = Products::find($id)->discounts;
         
@@ -73,13 +74,15 @@ class CartController extends Controller
             'options' => [
                 'img' => $product->Picture,
                 "category"=>$product->category->CategoryName,
-                "price_old" => $product->Price 
-                ]
+                "price_old" => $product->Price,
+                'size' => $request->txtSize
+            ],
             ];
             Cart::add($cart);
-            // dd(Cart::content());
+            //dd(Cart::content());
+            $cart_content = Cart::content();
             return redirect()->back()->with('message','Đã mua '.$product->ProductName.' thành công');
-        }
+    }
         
         /**
         * Update the specified resource in storage.
@@ -107,7 +110,7 @@ class CartController extends Controller
         {
             //
             Cart::remove($rowId);
-            return redirect()->route("cart.index")->with("message","Đã xóa sản phẩm trong giỏ hàng thành công");
+            return redirect()->back()->with("message","Đã xóa sản phẩm trong giỏ hàng thành công");
         }
         public function UpdateAllCart(Request $request){
             foreach($request->data as $item){

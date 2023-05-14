@@ -17,7 +17,7 @@ class ProductDetailController extends Controller
     //
     public function index(Request $request,$id)
     {
-        $categories = CategoryProducts::all();
+        $categories = CategoryProducts::where('Status',1)->get();
 
         $product = Products::join('discounts','products.id','=','discounts.Product_Id')
         ->select('discounts.*','products.*')

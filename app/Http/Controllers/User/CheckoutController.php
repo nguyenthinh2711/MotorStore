@@ -59,7 +59,7 @@ class CheckoutController extends Controller
     public function getFormPay(Request $request)
     {
         
-        $categories = CategoryProducts::all();
+        $categories = CategoryProducts::where('Status',1)->get();
         $cart = Cart::content();
         // $product_pay = OrderDetails::orderBy('amount','desc')
         //                 ->select(DB::raw('sum(Quantity) as amount, ProductId'))
@@ -110,6 +110,7 @@ class CheckoutController extends Controller
                         'OrderId' => $order_id,
                         'ProductId' => $value->id,
                         'Quantity' => $value->qty,
+                        'Size' => $value->options->size,
                         'UnitPrice' => $value->price,
                         'AddDate' => now('Asia/Ho_Chi_Minh'),
                         'created_at' => now(),
@@ -157,6 +158,7 @@ class CheckoutController extends Controller
                         'OrderId' => $order_id,
                         'ProductId' => $value->id,
                         'Quantity' => $value->qty,
+                        'Size' => $value->options->size,
                         'UnitPrice' => $value->price,
                         'AddDate' => now('Asia/Ho_Chi_Minh'),
                         'created_at' => now(),
@@ -177,7 +179,7 @@ class CheckoutController extends Controller
 
     public function success(Request $request)
     {
-        $categories = CategoryProducts::all();
+        $categories = CategoryProducts::where('Status',1)->get();
         $cart = Cart::content();
         // $product_pay = OrderDetails::orderBy('amount','desc')
         //                 ->select(DB::raw('sum(Quantity) as amount, ProductId'))
@@ -200,7 +202,7 @@ class CheckoutController extends Controller
         $user = Session::get('user_id');
         $cus_id = Customers::where('UserId', $user)->first()->id;
         $order_history = Orders::orderBy("OrderDate","DESC")->where('CustomerId', $cus_id)->get();
-        $categories = CategoryProducts::all();
+        $categories = CategoryProducts::where('Status',1)->get();
         $cart = Cart::content();
         // $product_pay = OrderDetails::orderBy('amount','desc')
         //                 ->select(DB::raw('sum(Quantity) as amount, ProductId'))
@@ -222,7 +224,7 @@ class CheckoutController extends Controller
     {
         $order_customer =  OrderDetails::where("OrderId", $order_id)->limit(1)->get();
         $order_detail = OrderDetails::where("OrderId", $order_id)->get();
-        $categories = CategoryProducts::all();
+        $categories = CategoryProducts::where('Status',1)->get();
         $cart = Cart::content();
         // $product_pay = OrderDetails::orderBy('amount','desc')
         //                 ->select(DB::raw('sum(Quantity) as amount, ProductId'))

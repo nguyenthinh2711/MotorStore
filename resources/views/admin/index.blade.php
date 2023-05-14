@@ -56,10 +56,14 @@
                         <td data-label="Tổng tiền" style="color:red; font-weight:bold; text-align:right">{{ number_format($order->total) }}</td>
                         <td data-label="Ngày đặt">{{ \Carbon\Carbon::parse($order->OrderDate)->format('d/m/Y') }}</td>
                         <td data-label="Trạng Thái">
-                             @if( $order->Status == 0)
-                                <a href="#" class="label label-warning">Chờ xử lý</a>
-                            @else
-                                  <a href="#" class="label-success label">Đã xử lý</a>
+                            @if($order->Status == 0)
+                                 <a href="#" class="label label-warning">Chờ xử lý</a>
+                            @elseif($order->Status == 1)
+                                <a href="#" class="label-success label">Đã xác nhận</a>
+                            @elseif($order->Status == 2)
+                                <a href="#" class="label-success label">Đang giao hàng</a>
+                            @elseif($order->Status == 3)
+                                <a href="#" class="label-success label">Đã giao hàng</a>
                             @endif
                         </td>
                         <td>

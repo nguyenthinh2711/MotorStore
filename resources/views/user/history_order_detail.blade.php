@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-10  text-center text-lg-left wow slideInUp" data-wow-duration="2s">
                 <h1 class="heading">Lịch sử mua hàng</h1>
-                <p class="para_text">"Một cuốn sản phẩm hay cho ta một điều tốt, một người bạn tốt cho ta một điều hay.” <b>- Gustavơ Lebon -</b></p>
+                <!-- <p class="para_text">"Một cuốn sản phẩm hay cho ta một điều tốt, một người bạn tốt cho ta một điều hay.” <b>- Gustavơ Lebon -</b></p> -->
             </div>
         </div>
     </div>
@@ -61,6 +61,7 @@
                         <th class="title">Phần trăm khuyến mãi</th>
                         <th class="title">Giá mới (đ)</th>
                         <th class="title">Số lượng</th>
+                        <th class="title">Size</th>
                         <th class="title">Thành tiền (đ)</th>
                     </tr>
                 </thead>
@@ -76,6 +77,7 @@
                         <td data-label="Phần trăm" style="color:red; font-weight:bold">{{ 100 - ((($r->UnitPrice*$r->Quantity)*100)/($r->product->Price*$r->Quantity)) }} %</td>
                         <td data-label="Giá mới(đ)" style="color:red; font-weight:bold; text-align:right">{{ number_format($r->UnitPrice)  }}</td>
                         <td data-label="Số lượng">{{ $r->Quantity }}</td>
+                        <td data-label="Số lượng">{{ $r->Size }}</td>
                         <td data-label="Thành tiền(đ)" style="color:red; font-weight:bold; text-align:right">{{ number_format($r->UnitPrice*$r->Quantity) }}</td>
                     </tr>
                     @endforeach

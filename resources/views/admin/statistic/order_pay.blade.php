@@ -99,8 +99,12 @@ if($message){
                     <td data-label="Trạng thái">
                         @if( $r->Status == 0)
                         <a href="#" class="label label-warning">Chờ xử lý</a>
-                        @else
-                        <a href="#" class="label-success label">Đã xử lý</a>
+                        @elseif( $r->Status == 1 )
+                        <a href="#" class="label-success label">Đã xác nhận</a>
+                        @elseif( $r->Status == 2 )
+                        <a href="#" class="label-success label">Đang giao hàng</a>
+                        @elseif( $r->Status == 3 )
+                        <a href="#" class="label-success label">Đã giao hàng</a>
                         @endif
                     </td>
                     <td>

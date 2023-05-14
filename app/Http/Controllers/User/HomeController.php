@@ -21,7 +21,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
        
-        $categories = CategoryProducts::all(); //LIST CATEGORY
+        $categories = CategoryProducts::where('Status',1)->get(); //LIST CATEGORY
 
 
         $products = Products::orderBy('id', 'DESC')->limit(5)->get();     //LIST PRODUCT
@@ -43,7 +43,7 @@ class HomeController extends Controller
             $search_product = Products::where("ProductName","LIKE","%".$keywords."%")->get();
         }
 
-        $category_footer = CategoryProducts::orderBy("id","DESC")->limit(9)->get();
+        $category_footer = CategoryProducts::where('Status',1)->orderBy("id","DESC")->limit(9)->get();
   
         return view("user.index", compact(
             "categories", 

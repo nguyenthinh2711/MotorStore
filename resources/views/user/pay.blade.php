@@ -3,7 +3,7 @@
 @section('content')
 <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
     <div class="container">
-        <h1 class="page-title">Thủ tục thanh toán<span>Motor Store</span></h1>
+        <h1 class="page-title">Thủ tục thanh toán<span>D&H STORE</span></h1>
     </div><!-- End .container -->
 </div><!-- End .page-header -->
 <nav aria-label="breadcrumb" class="breadcrumb-nav">
@@ -32,7 +32,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label>Tên khách hàng *</label>
-                                    <input type="text" autofocus name="txtName" pattern="^([a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌÓỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷỹ\s]+)$" class="form-control" @error('txtName') is-invalid @enderror" value="{{ old('txtName') }}" required autocomplete="txtName">
+                                    <input type="text" autofocus name="txtName" pattern="^([a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌÓỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷỹ\s]+)$" class="form-control" @error('txtName') is-invalid @enderror value="{{ old('txtName') }}" required autocomplete="txtName">
                                 </div><!-- End .col-sm-6 -->
                                 @error('txtName')
                                     <span class="invalid-feedback" role="alert">

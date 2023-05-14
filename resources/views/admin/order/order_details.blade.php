@@ -53,6 +53,7 @@ if($message){
                     <th>Phần trăm khuyến mãi</th>
                     <th>Giá mới (đ)</th>
                     <th>Số lượng</th>
+                    <th>Size</th>
                     <th>Thành tiền (đ)</th>
                     <th>Xoá</th>
                 </tr>
@@ -69,6 +70,7 @@ if($message){
                     <td data-label="Phần trăm" style="color:red; font-weight:bold">{{ 100 - ((($r->UnitPrice*$r->Quantity)*100)/($r->product->Price*$r->Quantity)) }} %</td>
                     <td data-label="Giá mới(đ)" style="color:red; font-weight:bold; text-align:right">{{ number_format($r->UnitPrice)  }}</td>
                     <td data-label="Số lượng">{{ $r->Quantity }}</td>
+                    <td data-label="Size">{{ $r->Size }}</td>
                     <td data-label="Thành tiền(đ)" style="color:red; font-weight:bold; text-align:right">{{ number_format($r->UnitPrice*$r->Quantity) }}</td>
                     <td data-label="Xoá" class="right__iconTable">
                         <form role="form" action="" method="post">

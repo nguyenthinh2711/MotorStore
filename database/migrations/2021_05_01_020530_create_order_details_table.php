@@ -20,6 +20,7 @@ class CreateOrderDetailsTable extends Migration
             $table->integer('ProductId')->unsigned();
             $table->foreign('ProductId')->references('id')->on('products')->onDelete('cascade');
             $table->Integer("Quantity")->default(0);
+            $table->string('Size');
             $table->double("UnitPrice")->default(0);
             $table->date("AddDate")->nullable();
             $table->timestamps();

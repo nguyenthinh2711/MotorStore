@@ -40,8 +40,10 @@
         <div class="right__inputWrapper">
             <label for="p_product">Trạng thái</label>
             <select name="sl_stt" class="form-control form-control-sm">
-                <option value="0" {{ $db->Status==0?"":"selected"}}>Chờ xử lý</option>
-                <option value="1" {{ $db->Status==0?"":"selected"}}>Đã xử lý</option>
+                <option value="0" {{ $db->Status==0?"selected":""}}>Chờ xử lý</option>
+                <option value="1" {{ $db->Status==1?"selected":""}}>Đã xác nhận</option>
+                <option value="2" {{ $db->Status==2?"selected":""}}>Đang giao hàng</option>
+                <option value="3" {{ $db->Status==3?"selected":""}}>Đã giao hàng</option>
             </select>
         </div>
         <button class="btn btn-info" type="submit">Cập nhật</button>

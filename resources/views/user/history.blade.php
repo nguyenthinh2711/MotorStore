@@ -28,15 +28,15 @@
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Code</th>
-                        <th>Customer name</th>
-                        <th>Booking date</th>
-                        <th>Customer phone</th>
-                        <th>customer address</th>
-                        <th>total  (VNĐ)</th>
-                        <th>Note order</th>
-                        <th>Status</th>
-                        <th>View</th>
+                        <th>Mã đơn hàng</th>
+                        <th>Tên khách hàng</th>
+                        <th>Ngày đặt</th>
+                        <th>Số điện thoại</th>
+                        <th>Địa chỉ</th>
+                        <th>Tổng tiền  (VNĐ)</th>
+                        <th>Ghi chú</th>
+                        <th>Trạng thái</th>
+                        <th>Xem chi tiết</th>
                     </tr>
                 </thead>
                 
@@ -53,9 +53,13 @@
                         <td data-label="Ghi chú" >{{ $r->Note }}</td>
                         <td data-label="Trạng thái">
                             @if($r->Status == 0)
-                            <a href="#" class="label label-warning">Chờ xử lý</a>
-                            @else
-                            <a href="#" class="label-success label">Đã xử lý</a>
+                                 <a href="#" class="label label-warning">Chờ xử lý</a>
+                            @elseif($r->Status == 1)
+                                <a href="#" class="label-success label">Đã xác nhận</a>
+                            @elseif($r->Status == 2)
+                                <a href="#" class="label-success label">Đang giao hàng</a>
+                            @elseif($r->Status == 3)
+                                <a href="#" class="label-success label">Đã giao hàng</a>
                             @endif
                         </td>
                         <td data-label="Xem" class="right__iconTable">

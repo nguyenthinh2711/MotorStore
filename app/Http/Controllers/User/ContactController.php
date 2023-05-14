@@ -16,7 +16,7 @@ class ContactController extends Controller
     //
     public function index(Request $request)
     {
-        $categories = CategoryProducts::all();
+        $categories = CategoryProducts::where('Status',1)->get();
         $cart = Cart::content();
         // $product_pay = OrderDetails::orderBy('amount','desc')
         //                 ->select(DB::raw('sum(Quantity) as amount, ProductId'))

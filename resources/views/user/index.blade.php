@@ -1,6 +1,79 @@
 @extends('layout')
 
 @section('content')
+
+<div class="intro-section bg-lighter pt-5 pb-6" style="background-color: white !important; height: 700px;">
+                            <div class="intro-slider-container slider-container-ratio slider-container-1 mb-2 mb-lg-0" style="height: 600px;">
+                                <div class="intro-slider intro-slider-1 owl-carousel owl-simple owl-light owl-nav-inside" data-toggle="owl" data-owl-options='{
+                                        "nav": false, 
+                                        "responsive": {
+                                            "768": {
+                                                "nav": true
+                                            }
+                                        }
+                                    }' style="height:600px;">
+                                    <div class="intro-slide">
+                                        <figure class="slide-image" style="height:600px;">
+                                            <picture style="height:600px;">
+                                                <source media="(max-width: 480px)" srcset="assets/images/slider/slide-1-480w.jpg">
+                                                <img src="assets/images/slider/slide-1.jpg" alt="Image Desc" style="height:600px;">
+                                            </picture>
+                                        </figure><!-- End .slide-image -->
+
+                                        <div class="intro-content">
+                                            <h3 class="intro-subtitle">Topsale Collection</h3><!-- End .h3 intro-subtitle -->
+                                            <h1 class="intro-title">Living Room<br>Furniture</h1><!-- End .intro-title -->
+
+                                            <a href="category.html" class="btn btn-outline-white">
+                                                <span>SHOP NOW</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </a>
+                                        </div><!-- End .intro-content -->
+                                    </div><!-- End .intro-slide -->
+
+                                    <div class="intro-slide">
+                                        <figure class="slide-image" style="height:600px;">
+                                            <picture style="height:600px;">
+                                                <source media="(max-width: 480px)" srcset="assets/images/slider/slide-1-480w.jpg">
+                                                <img src="assets/images/slider/slide-1.jpg" alt="Image Desc" style="height:600px;">
+                                            </picture>
+                                        </figure><!-- End .slide-image -->
+
+                                        <div class="intro-content">
+                                            <h3 class="intro-subtitle">Topsale Collection</h3><!-- End .h3 intro-subtitle -->
+                                            <h1 class="intro-title">Living Room<br>Furniture</h1><!-- End .intro-title -->
+
+                                            <a href="category.html" class="btn btn-outline-white">
+                                                <span>SHOP NOW</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </a>
+                                        </div><!-- End .intro-content -->
+                                    </div><!-- End .intro-slide -->
+
+                                    <div class="intro-slide">
+                                        <figure class="slide-image" style="height:600px;">
+                                            <picture style="height:600px;">
+                                                <source media="(max-width: 480px)" srcset="assets/images/slider/slide-1-480w.jpg">
+                                                <img src="assets/images/slider/slide-1.jpg" alt="Image Desc" style="height:600px;">
+                                            </picture>
+                                        </figure><!-- End .slide-image -->
+
+                                        <div class="intro-content">
+                                            <h3 class="intro-subtitle">Topsale Collection</h3><!-- End .h3 intro-subtitle -->
+                                            <h1 class="intro-title">Living Room<br>Furniture</h1><!-- End .intro-title -->
+
+                                            <a href="category.html" class="btn btn-outline-white">
+                                                <span>SHOP NOW</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </a>
+                                        </div><!-- End .intro-content -->
+                                    </div><!-- End .intro-slide -->
+                                </div><!-- End .intro-slider owl-carousel owl-simple -->
+                                
+                                <span class="slider-loader"></span><!-- End .slider-loader -->
+                            </div><!-- End .intro-slider-container -->
+</div><!-- End .bg-lighter -->
+
 <div class="container">
     <ul class="nav nav-pills nav-border-anim nav-big justify-content-center mb-3" role="tablist">
         <li class="nav-item">
@@ -62,7 +135,7 @@
                         </div><!-- End .product-price -->
                     </div><!-- End .product-body -->
                     <div class="product-action">
-                        <a href="{{ route('addcart', ['id' => $product->id]) }}" class="btn-product btn-cart"><span>Thêm vào giỏ hàng</span></a>
+                        <a href="{{ route('product_detail').'/'.$product->id }}" class="btn-product btn-cart"><span>Xem Chi Tiết</span></a>
                     </div><!-- End .product-action -->
                 </div><!-- End .product -->
                 @endforeach     
@@ -115,7 +188,7 @@
                         </div><!-- End .product-price -->
                     </div><!-- End .product-body -->
                     <div class="product-action">
-                        <a href="{{ route('addcart', ['id' => $product->product->id]) }}" class="btn-product btn-cart"><span>Thêm vào giỏ hàng</span></a>
+                        <a href="{{ route('product_detail').'/'.$product->product->id }}" class="btn-product btn-cart"><span>Xem Chi Tiết</span></a>
                     </div><!-- End .product-action -->
                 </div><!-- End .product -->
                 @endforeach
@@ -125,7 +198,7 @@
 </div><!-- End .container-fluid -->
 
 
-<div class="container">
+<div class="container mt-5">
     <div class="heading heading-center mb-3">
         <h2 class="title">Top sản phẩm bán chạy</h2><!-- End .title -->
 
@@ -166,7 +239,7 @@
                                 </div><!-- End .product-price -->
                             </div><!-- End .product-body -->
                             <div class="product-action">
-                                <a href="{{ route('addcart', ['id' => $product->id]) }}" class="btn-product btn-cart"><span>thêm vào giỏ hàng</span></a>
+                                <a href="{{ route('product_detail').'/'.$product->id }}" class="btn-product btn-cart"><span>Xem Chi Tiết</span></a>
                             </div><!-- End .product-action -->
                         </div><!-- End .product -->
                     </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->

@@ -47,8 +47,8 @@
                                     
                                 </a> --}}
                                 @foreach($pictures as $value)
-                                <div class="product-gallery-item ">
-                                    <img  src="{{asset('img'.'/'.$value->picture)}}" alt="product cross" onclick="changeImg('{{$value->id}}')" id="{{ $value->id }}">
+                                <div class="product-gallery-item" onclick="changeImg('{{$value->id}}')">
+                                    <img  src="{{asset('img'.'/'.$value->picture)}}" alt="product cross"  id="{{ $value->id }}">
                                 </div>
                                 
                                 {{-- <a class="product-gallery-item " href="" data-image="{{asset('img'.'/'.$value->picture)}}" data-zoom-image="{{asset('img'.'/'.$value->picture)}}">
@@ -81,10 +81,22 @@
                         </div><!-- End .product-price -->
 
                         <div class="product-content">
-                            <p>Tìm được phụ tùng tốt sẽ làm cho chiếc xe máy của bạn trở nên hoàn hảo hơn, cuộc sống của bạn sẽ dễ chịu hơn.</p>
+                            <p>Thời trang của bạn, phong cách của chúng tôi. Sự hài lòng của bạn là niềm vui của cửa hàng</p>
                         </div><!-- End .product-content -->                     
                         <form action="{{ route('addcart', ['id' => $product->id]) }}" method="get" enctype="multipart/form-data">
                             @csrf
+                            <div class="details-filter-row details-row-size">
+                                <label for="size">Size:</label>
+                                <div class="select-custom">
+                                    <select name="txtSize" id="txtSize" class="form-control" required>
+                                        <option value="S" selected="selected">S</option>
+                                        <option value="M">M</option>
+                                        <option value="L">L</option>
+                                        <option value="XL">XL</option>
+                                    </select>
+                                </div><!-- End .select-custom -->
+                            </div><!-- End .details-filter-row -->
+
                             <div class="details-filter-row details-row-size">
                                 <label for="qty">Qty:</label>
                                 <div class="product-details-quantity">

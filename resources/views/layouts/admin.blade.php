@@ -22,7 +22,7 @@
                         <span></span>
                     </span>
                     <div class="left__content">
-                        <div class="left__logo">MOTOR STORE</div>
+                        <div class="left__logo">D&H STORE</div>
                         <div class="left__profile">
                             <div class="left__image"><img src="{{asset('assets/images/logo.png')}}" alt=""></div>
                             @if(Auth::check())
